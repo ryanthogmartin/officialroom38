@@ -348,22 +348,15 @@ button { font: inherit; cursor: pointer; }
 
 .section-eyebrow {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: var(--t-eyebrow);
-  letter-spacing: var(--track-eyebrow);
+  font-weight: 800;
+  font-size: clamp(1.125rem, 0.75rem + 1.15vw, 1.875rem);
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--ink);
   margin: 0 0 1rem;
 }
 .section-eyebrow.on-dark,
 .on-dark { color: var(--muted-on-dark); }
-
-.vision-eyebrow {
-  font-size: clamp(1.125rem, 0.75rem + 1.15vw, 1.875rem);
-  font-weight: 800;
-  letter-spacing: 0.22em;
-  color: var(--ink);
-}
 
 .section-title {
   font-family: var(--font-display);
