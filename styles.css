@@ -5,13 +5,16 @@
    ============================================================ */
 
 :root {
-  /* Palette — true black/white with a single off-white surface */
-  --ink:       #0a0a0a;
-  --ink-soft:  #1a1a1a;
+  /* Palette — black/white identity with restrained Table Guide neutrals */
+  --ink:       #160f0a;
+  --ink-soft:  #261b13;
   --paper:     #ffffff;
-  --paper-2:   #f4f2ed;   /* soft warm cream, used sparingly */
-  --rule:      #0a0a0a;
-  --rule-soft: rgba(10, 10, 10, 0.12);
+  --paper-warm:#f7f1eb;
+  --paper-2:   #e8d8c8;
+  --paper-3:   #e0d0c8;
+  --taupe:     #b0a090;
+  --rule:      #160f0a;
+  --rule-soft: rgba(22, 15, 10, 0.14);
   --rule-dim:  rgba(255, 255, 255, 0.14);
   --muted:     #6a6a6a;
   --muted-on-dark: rgba(255, 255, 255, 0.62);
@@ -53,7 +56,7 @@ body {
   font-size: var(--t-body);
   line-height: 1.55;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--paper-warm);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -85,7 +88,7 @@ button { font: inherit; cursor: pointer; }
    ============================================================ */
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(255, 255, 255, 0.86);
+  background: rgba(247, 241, 235, 0.88);
   backdrop-filter: saturate(140%) blur(10px);
   -webkit-backdrop-filter: saturate(140%) blur(10px);
   border-bottom: 1px solid var(--rule-soft);
@@ -182,7 +185,7 @@ button { font: inherit; cursor: pointer; }
   padding-top: clamp(2rem, 1rem + 3vw, 3.5rem);
   padding-bottom: clamp(3rem, 1.5rem + 4vw, 5rem);
   border-bottom: 1px solid var(--ink);
-  background: var(--paper);
+  background: linear-gradient(180deg, var(--paper-warm) 0%, var(--paper) 58%, var(--paper-warm) 100%);
 }
 
 .hero-meta-row {
@@ -199,6 +202,7 @@ button { font: inherit; cursor: pointer; }
 }
 .meta-mark {
   border: 1px solid var(--ink);
+  background: var(--paper);
   color: var(--ink);
   padding: 0.25rem 0.5rem;
   font-weight: 700;
@@ -298,7 +302,7 @@ button { font: inherit; cursor: pointer; }
 .strip {
   border-block: 1px solid var(--ink);
   overflow: hidden;
-  background: var(--paper);
+  background: var(--paper-2);
 }
 .strip-track {
   display: inline-flex;
@@ -330,6 +334,14 @@ button { font: inherit; cursor: pointer; }
 .section {
   padding-block: clamp(3.5rem, 2rem + 5vw, 7rem);
   border-bottom: 1px solid var(--rule-soft);
+}
+.section-vision,
+.section-details {
+  background: var(--paper-warm);
+}
+.section-table,
+.section-ig {
+  background: var(--paper);
 }
 .section-dark {
   background: var(--ink);
@@ -472,6 +484,8 @@ button { font: inherit; cursor: pointer; }
   border-top: 1px solid var(--rule-soft);
   border-bottom: 1px solid var(--rule-soft);
   padding-block: 2rem;
+  padding-inline: clamp(1.25rem, 1rem + 2vw, 2rem);
+  background: rgba(232, 216, 200, 0.35);
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.75rem;
@@ -554,6 +568,7 @@ button { font: inherit; cursor: pointer; }
   margin-bottom: clamp(3rem, 2rem + 3vw, 5rem);
   padding-block: clamp(2rem, 1.5rem + 2vw, 3.5rem);
   border-block: 1px solid var(--rule-soft);
+  background: var(--paper-warm);
 }
 .verse-eyebrow {
   font-family: var(--font-display);
@@ -665,6 +680,7 @@ button { font: inherit; cursor: pointer; }
 .detail-card {
   padding: 2rem 1.5rem;
   border-bottom: 1px solid var(--rule-soft);
+  background: rgba(255, 255, 255, 0.52);
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
@@ -685,7 +701,7 @@ button { font: inherit; cursor: pointer; }
   font-size: 0.75rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: #7d6d60;
 }
 .detail-card p {
   margin: 0;
@@ -767,6 +783,7 @@ button { font: inherit; cursor: pointer; }
 .instagram-embed-shell .instagram-media a {
   display: block;
   border: 1px solid var(--ink);
+  background: var(--paper-warm);
   padding: 2rem;
   font-family: var(--font-display);
   font-weight: 800;
