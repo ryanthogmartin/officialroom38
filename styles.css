@@ -188,6 +188,7 @@ button { font: inherit; cursor: pointer; }
 .hero-meta-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.75rem;
   margin-bottom: clamp(2rem, 1.2rem + 2vw, 3rem);
   font-family: var(--font-display);
@@ -203,10 +204,9 @@ button { font: inherit; cursor: pointer; }
   font-weight: 700;
 }
 .meta-divider {
-  flex: 1;
+  flex: 0 1 clamp(3rem, 16vw, 240px);
   height: 1px;
   background: var(--ink);
-  max-width: 240px;
 }
 .meta-text { white-space: nowrap; }
 
@@ -917,6 +917,203 @@ button { font: inherit; cursor: pointer; }
 }
 .footer-bottom p { margin: 0; }
 .footer-site { font-weight: 600; color: var(--paper); }
+
+/* ============================================================
+   MOBILE FLOW
+   ============================================================ */
+@media (max-width: 819px) {
+  :root {
+    --gutter: clamp(1rem, 4.5vw, 1.35rem);
+    --t-section: clamp(2rem, 10vw, 3rem);
+  }
+
+  .nav-row {
+    min-height: 64px;
+    gap: 0.75rem;
+  }
+  .brand-wordmark { font-size: 0.8125rem; }
+  .nav-cta {
+    padding-inline: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  .hero {
+    padding-top: 1.75rem;
+    padding-bottom: 3.25rem;
+  }
+  .hero-meta-row {
+    width: 100%;
+    text-align: center;
+    margin-inline: auto;
+  }
+  .meta-divider { flex-basis: clamp(1.5rem, 10vw, 4.5rem); }
+  .hero-grid {
+    justify-items: center;
+    text-align: center;
+  }
+  .hero-lockup img { max-width: min(82vw, 360px); }
+  .hero-content {
+    align-items: center;
+    max-width: 42rem;
+  }
+  .tagline-image img { margin-inline: auto; }
+  .hero-lede { margin-inline: auto; }
+  .hero-ctas { justify-content: center; }
+  .hero-stats {
+    width: min(100%, 34rem);
+    text-align: center;
+  }
+  .hero-stats > div + div {
+    padding-left: 0.75rem;
+  }
+
+  .section {
+    padding-block: clamp(3.75rem, 13vw, 5.5rem);
+  }
+  .section-head,
+  .join-head,
+  .ig-copy {
+    text-align: center;
+    margin-inline: auto;
+  }
+  .section-eyebrow {
+    margin-inline: auto;
+    max-width: 20ch;
+  }
+  .section-title,
+  .section-sub,
+  .lede,
+  .lede.strong,
+  .welcome-note blockquote,
+  .footer-scripture .scripture {
+    margin-inline: auto;
+  }
+  .section-title,
+  .section-sub,
+  .lede,
+  .welcome-note,
+  .table-why,
+  .ig-row {
+    text-align: center;
+  }
+  .grid-2 {
+    justify-items: center;
+  }
+
+  .pillars li {
+    align-items: center;
+    padding: 1.5rem 0;
+    text-align: center;
+  }
+  .pillars p { margin-inline: auto; }
+  .welcome-note {
+    justify-items: center;
+  }
+
+  .for-list li {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    justify-items: center;
+    text-align: center;
+    padding-block: 1.75rem;
+  }
+  .for-list li:hover {
+    padding-left: 0;
+  }
+  .believe-strip {
+    border-left: 0;
+    border-top: 2px solid var(--paper);
+    padding-left: 0;
+    padding-top: 1.25rem;
+    text-align: center;
+  }
+
+  .values-grid li,
+  .detail-card {
+    align-items: center;
+    text-align: center;
+    padding-inline: 1rem;
+  }
+  .detail-card:first-child { padding-top: 1.75rem; }
+
+  .typeform-wrap {
+    margin-inline: calc(var(--gutter) * -0.25);
+  }
+  .typeform-frame {
+    height: min(720px, 78vh);
+  }
+
+  .ig-card {
+    width: min(100%, 29rem);
+    margin-inline: auto;
+  }
+  .ig-card-top {
+    justify-content: center;
+    text-align: left;
+  }
+
+  .footer-wordmark,
+  .footer-grid,
+  .footer-bottom {
+    text-align: center;
+  }
+  .footer-grid {
+    justify-items: center;
+  }
+  .footer-col ul {
+    align-items: center;
+  }
+  .footer-bottom {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-meta-row {
+    flex-wrap: wrap;
+    row-gap: 0.55rem;
+  }
+  .meta-divider {
+    display: none;
+  }
+  .meta-mark,
+  .meta-text {
+    flex: 0 0 auto;
+  }
+  .hero-ctas {
+    width: 100%;
+    flex-direction: column;
+  }
+  .hero-ctas .btn {
+    width: min(100%, 22rem);
+  }
+  .hero-stats {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-top: 0;
+  }
+  .hero-stats > div {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .hero-stats > div + div {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .hero-stats > div:last-child {
+    border-bottom: 0;
+  }
+  .section-eyebrow {
+    letter-spacing: 0.17em;
+  }
+  .ig-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footer-wordmark {
+    white-space: normal;
+    line-height: 0.95;
+  }
+}
 
 /* ============================================================
    FOCUS STATES (a11y)
