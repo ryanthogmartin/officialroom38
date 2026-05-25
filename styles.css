@@ -754,74 +754,25 @@ button { font: inherit; cursor: pointer; }
 }
 .ig-copy .btn { margin-top: 0.5rem; }
 
-.ig-card {
+.instagram-embed-shell {
+  width: min(100%, 540px);
+  margin-inline: auto;
+}
+.instagram-embed-shell .instagram-media {
+  margin: 0 auto !important;
+  min-width: min(326px, 100%) !important;
+  max-width: 540px !important;
+  width: 100% !important;
+}
+.instagram-embed-shell .instagram-media a {
   display: block;
-  background: var(--paper);
   border: 1px solid var(--ink);
-  padding: 1.75rem;
-  color: var(--ink);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.ig-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 8px 8px 0 var(--ink);
-}
-.ig-card-top {
-  display: flex;
-  align-items: center;
-  gap: 0.875rem;
-  padding-bottom: 1.25rem;
-  border-bottom: 1px solid var(--rule-soft);
-}
-.ig-avatar {
-  width: 52px; height: 52px;
-  display: grid; place-items: center;
-  background: var(--ink); color: var(--paper);
-}
-.ig-avatar svg { width: 28px; height: 28px; color: currentColor; }
-.ig-handle {
+  padding: 2rem;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-.ig-name {
-  font-size: 0.8125rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 0.15rem;
-}
-.ig-grid {
-  margin-top: 1.25rem;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
-}
-.ig-tile {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  background: var(--ink);
-  color: var(--paper);
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-}
-.ig-tile:nth-child(even) { background: var(--paper); color: var(--ink); border: 1px solid var(--ink); }
-.ig-tile span {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-.ig-cta {
-  margin-top: 1.25rem;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.8125rem;
-  letter-spacing: 0.14em;
+  font-size: 0.875rem;
+  letter-spacing: 0.12em;
+  text-align: center;
   text-transform: uppercase;
 }
 
@@ -1043,13 +994,9 @@ button { font: inherit; cursor: pointer; }
     height: min(720px, 78vh);
   }
 
-  .ig-card {
+  .instagram-embed-shell {
     width: min(100%, 29rem);
     margin-inline: auto;
-  }
-  .ig-card-top {
-    justify-content: center;
-    text-align: left;
   }
 
   .footer-wordmark,
@@ -1106,9 +1053,6 @@ button { font: inherit; cursor: pointer; }
   .section-eyebrow {
     letter-spacing: 0.17em;
   }
-  .ig-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
   .footer-wordmark {
     white-space: normal;
     line-height: 0.95;
@@ -1133,5 +1077,5 @@ button:focus-visible,
    PRINT
    ============================================================ */
 @media print {
-  .site-header, .strip, .typeform-wrap, .ig-card { display: none; }
+  .site-header, .strip, .typeform-wrap, .instagram-embed-shell { display: none; }
 }
