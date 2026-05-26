@@ -121,8 +121,37 @@ button { font: inherit; cursor: pointer; }
   color: var(--muted);
 }
 .nav-links a:hover { color: var(--ink); }
+.menu-toggle {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  padding: 0;
+  margin-left: auto;
+}
+.menu-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.site-header.menu-open .menu-toggle span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.site-header.menu-open .menu-toggle span:nth-child(2) { opacity: 0; }
+.site-header.menu-open .menu-toggle span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 @media (min-width: 820px) {
   .nav-links { display: inline-flex; }
+  .menu-toggle { display: none; }
 }
 /* Nav CTA is always visible — compact on mobile, full on desktop */
 .nav-cta {
@@ -1141,12 +1170,42 @@ button { font: inherit; cursor: pointer; }
   .nav-row {
     min-height: 64px;
     gap: 0.75rem;
+    position: relative;
   }
   .brand-wordmark { font-size: 0.8125rem; }
   .nav-cta {
     padding-inline: 0.75rem;
     letter-spacing: 0.08em;
   }
+  .nav-links {
+    position: absolute;
+    top: calc(100% + 1px);
+    left: var(--gutter);
+    right: var(--gutter);
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--ink);
+    padding: 0.35rem 0;
+    z-index: 40;
+    color: var(--ink);
+  }
+  .site-header.menu-open .nav-links {
+    display: flex;
+  }
+  .nav-links a {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0.95rem 1.1rem;
+    border-bottom: 1px solid var(--rule-soft);
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: 0.14em;
+  }
+  .nav-links a:last-child { border-bottom: 0; }
 
   .hero {
     padding-top: 1.75rem;
