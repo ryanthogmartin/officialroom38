@@ -1250,6 +1250,13 @@ button { font: inherit; cursor: pointer; }
     margin-inline: auto;
     max-width: 20ch;
   }
+  .worship-page-hero .section-eyebrow {
+    text-align: center;
+    max-width: 16ch;
+  }
+  .worship-page-hero .worship-back {
+    display: none;
+  }
   .section-title,
   .section-sub,
   .lede,
