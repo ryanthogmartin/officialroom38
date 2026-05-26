@@ -73,6 +73,7 @@
           <a href="#vision">Vision</a>
           <a href="#table">The Table</a>
           <a href="#values">Values</a>
+          <a href="#worship">Worship</a>
           <a href="#details">Details</a>
           <a href="#join">Join</a>
         </nav>
@@ -322,6 +323,71 @@
         </div>
       </section>
 
+      <!-- ============ WORSHIP ============ -->
+      <!--
+        ╭────────────────────────────────────────────────────────────────╮
+        │  WORSHIP SECTION                                               │
+        │  Embeds the official Room 38 worship sessions Spotify          │
+        │  playlist. To swap the playlist:                               │
+        │    1) Copy the playlist ID from the Spotify share URL          │
+        │       (the long alphanumeric string after /playlist/)          │
+        │    2) Replace it in BOTH the iframe src below AND in the       │
+        │       "Open in Spotify" link's href.                           │
+        │    3) Also update worship.html (same two spots).               │
+        ╰────────────────────────────────────────────────────────────────╯
+      -->
+      <section class="section section-worship" id="worship" aria-labelledby="worship-title">
+        <div class="container">
+          <div class="section-head">
+            <p class="section-eyebrow">Worship Sessions</p>
+            <h2 id="worship-title" class="section-title">
+              The songs we sing around <em>the table.</em>
+            </h2>
+            <p class="section-sub">
+              A living playlist of the worship that shapes our gatherings: what we sing on
+              Monday nights, what we play in the kitchen, and what carries us into His
+              presence between rooms.
+            </p>
+          </div>
+
+          <div class="worship-grid">
+            <div class="worship-embed-shell">
+              <iframe
+                title="Room 38 Worship Sessions playlist on Spotify"
+                class="worship-embed"
+                src="https://open.spotify.com/embed/playlist/01vM88ofRGwsxR3VKUVhxp?utm_source=generator&theme=0"
+                width="100%"
+                height="480"
+                frameborder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+              ></iframe>
+            </div>
+
+            <aside class="worship-aside">
+              <p class="worship-aside-eyebrow">Listen anywhere</p>
+              <p class="worship-aside-lede">
+                Save the playlist on Spotify, or browse the full songs &amp; lyrics index
+                with every track linked to listen, read, and meditate on the words.
+              </p>
+              <div class="worship-ctas">
+                <a
+                  href="https://open.spotify.com/playlist/01vM88ofRGwsxR3VKUVhxp"
+                  target="_blank"
+                  rel="noopener"
+                  class="btn btn-primary"
+                >
+                  Open in Spotify →
+                </a>
+                <a href="worship.html" class="btn btn-ghost">
+                  Songs &amp; lyrics →
+                </a>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
       <!-- ============ DETAILS ============ -->
       <!--
         ╭────────────────────────────────────────────────────────────────╮
@@ -451,6 +517,8 @@
               <li><a href="#vision">Vision</a></li>
               <li><a href="#table">The Table</a></li>
               <li><a href="#values">Values</a></li>
+              <li><a href="#worship">Worship</a></li>
+              <li><a href="worship.html">Songs &amp; lyrics</a></li>
               <li><a href="#details">Details</a></li>
               <li><a href="#join">Save your seat</a></li>
             </ul>

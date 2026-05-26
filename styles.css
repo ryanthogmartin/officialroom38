@@ -794,6 +794,267 @@ button { font: inherit; cursor: pointer; }
 }
 
 /* ============================================================
+   WORSHIP (homepage section + worship.html page)
+   ============================================================ */
+.section-worship {
+  background: var(--paper-warm);
+}
+
+.worship-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .worship-grid {
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: clamp(2rem, 1.5rem + 2vw, 4rem);
+  }
+}
+
+.worship-embed-shell {
+  width: 100%;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  padding: 0;
+  line-height: 0;
+}
+.worship-embed {
+  width: 100%;
+  min-height: 380px;
+  height: 480px;
+  border: 0;
+  display: block;
+  background: var(--ink);
+}
+
+.worship-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-top: 0.25rem;
+}
+.worship-aside-eyebrow {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.worship-aside-lede {
+  margin: 0;
+  font-size: var(--t-lede);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 38ch;
+}
+.worship-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin-top: 0.25rem;
+}
+
+/* Worship page (worship.html) */
+.worship-page-hero {
+  border-bottom: 1px solid var(--ink);
+  background: linear-gradient(180deg, var(--paper-warm) 0%, var(--paper) 100%);
+  padding-block: clamp(3rem, 2rem + 4vw, 5.5rem);
+}
+.worship-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  margin-bottom: clamp(1.25rem, 1rem + 1vw, 2rem);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.worship-back:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+.worship-page-hero .section-eyebrow { margin-top: 0; }
+.worship-page-hero .section-title { max-width: 22ch; }
+.worship-page-hero .section-sub { max-width: 58ch; }
+
+.worship-page-embed {
+  margin-top: clamp(2rem, 1.5rem + 2vw, 3rem);
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  line-height: 0;
+}
+.worship-page-embed iframe {
+  width: 100%;
+  height: 380px;
+  border: 0;
+  display: block;
+}
+
+/* Songs index */
+.section-songs { background: var(--paper); }
+
+.songs-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  align-items: center;
+  margin-bottom: clamp(1.5rem, 1rem + 1vw, 2.25rem);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule-soft);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.songs-meta strong { color: var(--ink); font-weight: 800; }
+
+.songs-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+@media (min-width: 720px) {
+  .songs-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1080px) {
+  .songs-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.song-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.75rem 1.5rem;
+  border-bottom: 1px solid var(--rule-soft);
+  background: var(--paper);
+}
+@media (min-width: 720px) {
+  .song-card { border-right: 1px solid var(--rule-soft); }
+  .song-card:nth-child(2n) { border-right: none; }
+}
+@media (min-width: 1080px) {
+  .song-card { border-right: 1px solid var(--rule-soft); }
+  .song-card:nth-child(2n) { border-right: 1px solid var(--rule-soft); }
+  .song-card:nth-child(3n) { border-right: none; }
+}
+.song-num {
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.song-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.1875rem;
+  line-height: 1.2;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.song-artist {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.song-theme {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  border-left: 2px solid var(--paper-2);
+  padding-left: 0.75rem;
+}
+.song-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.song-links a {
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 2px;
+  color: var(--ink);
+  transition: opacity 0.2s ease;
+}
+.song-links a:hover { opacity: 0.6; }
+.song-links a[aria-disabled="true"] {
+  color: var(--muted);
+  border-bottom-color: var(--rule-soft);
+  pointer-events: none;
+}
+
+/* Add-songs helper block */
+.songs-howto {
+  margin-top: clamp(2.5rem, 1.5rem + 2vw, 3.5rem);
+  padding: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
+  background: var(--paper-warm);
+  border: 1px solid var(--rule-soft);
+}
+.songs-howto h3 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.songs-howto p {
+  margin: 0 0 0.75rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 60ch;
+}
+.songs-howto code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8125rem;
+  background: var(--paper);
+  border: 1px solid var(--rule-soft);
+  padding: 0.1rem 0.35rem;
+}
+.songs-howto a {
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 1px;
+}
+
+@media (max-width: 819px) {
+  .worship-aside {
+    align-items: center;
+    text-align: center;
+  }
+  .worship-aside-lede { margin-inline: auto; }
+  .worship-ctas { justify-content: center; }
+  .worship-embed { height: 420px; }
+  .song-card { align-items: flex-start; text-align: left; }
+  .songs-howto { text-align: left; }
+}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 .site-footer {

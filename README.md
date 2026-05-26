@@ -8,8 +8,9 @@ Stack: plain HTML + CSS + a tiny JS file. No build step. No framework. Ready to 
 
 ```
 room38/
-├── index.html        ← All page copy + structure (single source of truth)
-├── styles.css        ← All design tokens & layout
+├── index.html        ← Homepage copy + structure
+├── worship.html      ← Worship songs & lyrics index (data-driven cards)
+├── styles.css        ← All design tokens & layout (shared by both pages)
 ├── script.js         ← Year stamp + sticky-header polish (tiny)
 ├── netlify.toml      ← Netlify config (caching headers, security)
 ├── robots.txt        ← SEO
@@ -51,9 +52,70 @@ Section anchors (also used by the nav):
 - `#for` — §02 Who it's for
 - `#table` — §03 Psalm 23:5 + why a table
 - `#values` — §04 Table Values
-- `#details` — §05 When / Where / Format / Bring
-- `#join` — §06 Typeform RSVP
-- `#instagram` — §07 Follow on Instagram
+- `#worship` — §05 Worship sessions (Spotify embed + link to /worship.html)
+- `#details` — §06 When / Where / Format / Bring
+- `#join` — §07 Typeform RSVP
+- `#instagram` — §08 Follow on Instagram
+
+## How to update the worship section / page
+
+The Room 38 worship sessions Spotify playlist is embedded in two places:
+
+1. **`index.html`** — the homepage `#worship` section (compact embed + CTA buttons).
+2. **`worship.html`** — the dedicated songs & lyrics page (larger embed at the top).
+
+### Swap the playlist
+
+If the playlist ID changes, replace it in **three** places:
+
+1. In `index.html`, inside the `<section class="section-worship">` block — both the
+   iframe `src` AND the "Open in Spotify" link's `href`.
+2. In `worship.html`, inside the top `<section class="worship-page-hero">` block —
+   the iframe `src`.
+3. In `worship.html` footer's "Spotify playlist" link (under "Elsewhere").
+
+The current playlist ID is **`01vM88ofRGwsxR3VKUVhxp`**. Spotify's share URL is
+`https://open.spotify.com/playlist/<ID>?si=…` — the ID is the long string between
+`/playlist/` and `?`. The embed URL pattern is
+`https://open.spotify.com/embed/playlist/<ID>?utm_source=generator&theme=0`.
+
+### Add a song to the index on `/worship.html`
+
+Inside `worship.html`, find the `<ol class="songs-grid">` block. Each song is one
+`<li class="song-card">` — copy any existing card and fill in:
+
+```html
+<li class="song-card">
+  <span class="song-num">06</span>
+  <h3 class="song-title">Song Title Here</h3>
+  <p class="song-artist">Artist Name</p>
+  <p class="song-theme">Optional one-line note about the theme or moment.</p>
+  <div class="song-links">
+    <a href="https://open.spotify.com/track/<TRACK_ID>" target="_blank" rel="noopener">Listen ↗</a>
+    <a href="https://genius.com/<artist-song-lyrics-slug>" target="_blank" rel="noopener">Lyrics ↗</a>
+  </div>
+</li>
+```
+
+**Fields:**
+
+- `song-num` — visual only, renumber if you reorder.
+- `song-title` — the track title (rendered uppercase).
+- `song-artist` — the primary artist(s).
+- `song-theme` — optional one-liner about why this song matters or what moment it
+  carries. Omit the `<p class="song-theme">` line entirely if you don't want one.
+- `Listen ↗` link — paste the Spotify song URL. Open the song in Spotify → click
+  the ⋯ menu → Share → "Copy Song Link".
+- `Lyrics ↗` link — link to a legal lyrics source (Genius, Hymnary, the artist's
+  official site, or the publisher's lyrics page). If a lyrics link isn't ready
+  yet, swap the `<a>` for `<a aria-disabled="true" href="#">Lyrics ↗</a>` and it
+  will render greyed out and unclickable.
+
+**Important — do NOT paste copyrighted lyric text into the page.** Only link out.
+This keeps Room 38 in good standing with songwriters and publishers.
+
+The page comment block at the top of the `<section class="section-songs">` repeats
+these instructions inline so editors don't have to leave the file.
 
 ## How to update the Typeform embed
 
