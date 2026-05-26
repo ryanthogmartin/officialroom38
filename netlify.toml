@@ -6,6 +6,23 @@
   # No build step — this is a static site.
   publish = "."
 
+# Clean URL for /worship/ while keeping worship.html as the canonical file.
+[[redirects]]
+  from = "/worship/"
+  to = "/worship.html"
+  status = 200
+
+[[redirects]]
+  from = "/worship"
+  to = "/worship/"
+  status = 301
+
+# Branded custom 404 for any unmatched path.
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
 [[headers]]
   for = "/*"
   [headers.values]
