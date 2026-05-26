@@ -46,6 +46,7 @@
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html, body { overflow-x: clip; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
@@ -1169,12 +1170,19 @@ button { font: inherit; cursor: pointer; }
 
   .nav-row {
     min-height: 64px;
-    gap: 0.6rem;
+    gap: 0.5rem;
     position: relative;
   }
   .brand-wordmark { font-size: 0.8125rem; }
+  .menu-toggle {
+    min-width: 56px;
+    padding: 0 0.7rem;
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+  }
   .nav-cta {
-    padding-inline: 0.65rem;
+    padding: 0.6rem 0.7rem;
+    font-size: 0.625rem;
     letter-spacing: 0.08em;
   }
   .nav-links {
@@ -1187,7 +1195,7 @@ button { font: inherit; cursor: pointer; }
     gap: 0;
     background: var(--paper);
     border: 1px solid var(--ink);
-    box-shadow: 8px 8px 0 var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
     padding: 0.35rem 0;
     z-index: 40;
     color: var(--ink);
@@ -1248,14 +1256,29 @@ button { font: inherit; cursor: pointer; }
   }
   .section-eyebrow {
     margin-inline: auto;
-    max-width: 20ch;
+    max-width: 22ch;
+    font-size: clamp(0.9375rem, 0.8rem + 1.4vw, 1.25rem);
+    letter-spacing: 0.18em;
   }
   .worship-page-hero .section-eyebrow {
     text-align: center;
-    max-width: 16ch;
+    max-width: 22ch;
   }
   .worship-page-hero .worship-back {
     display: none;
+  }
+  .songs-meta {
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 0.14em;
+  }
+  .pillars li:last-child,
+  .detail-card:last-child,
+  .song-card:last-child {
+    border-bottom: 0;
+  }
+  .worship-ctas .btn {
+    width: min(100%, 22rem);
   }
   .section-title,
   .section-sub,
@@ -1357,8 +1380,13 @@ button { font: inherit; cursor: pointer; }
     width: 100%;
     flex-direction: column;
   }
-  .hero-ctas .btn {
+  .hero-ctas .btn,
+  .worship-ctas .btn {
     width: min(100%, 22rem);
+  }
+  .worship-ctas {
+    flex-direction: column;
+    align-items: center;
   }
   .hero-stats {
     grid-template-columns: 1fr;
@@ -1377,11 +1405,75 @@ button { font: inherit; cursor: pointer; }
     border-bottom: 0;
   }
   .section-eyebrow {
-    letter-spacing: 0.17em;
+    letter-spacing: 0.16em;
   }
   .footer-wordmark {
     white-space: normal;
     line-height: 0.95;
+    font-size: clamp(2.75rem, 14vw, 4.5rem);
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  .worship-embed {
+    height: 380px;
+  }
+  .worship-page-embed iframe {
+    height: 352px;
+  }
+  .typeform-wrap {
+    margin-inline: 0;
+  }
+}
+
+/* iPhone-narrow polish (≤430px) — SE/12 mini/13 mini and below */
+@media (max-width: 430px) {
+  .nav-row { gap: 0.4rem; }
+  .menu-toggle {
+    min-width: 52px;
+    padding: 0 0.55rem;
+    font-size: 0.5625rem;
+    letter-spacing: 0.1em;
+  }
+  .nav-cta {
+    padding: 0.55rem 0.55rem;
+    font-size: 0.5625rem;
+    letter-spacing: 0.06em;
+  }
+  .brand-wordmark { font-size: 0.75rem; }
+
+  .hero { padding-top: 1.25rem; padding-bottom: 2.5rem; }
+  .hero-meta-row {
+    font-size: 0.625rem;
+    letter-spacing: 0.14em;
+    gap: 0.5rem;
+  }
+  .hero-lockup img { max-width: min(78vw, 320px); }
+
+  .section { padding-block: 3rem; }
+  .section-head { margin-bottom: 1.75rem; }
+
+  .pillars li { padding: 1.25rem 0; }
+  .for-list li { padding-block: 1.25rem; }
+  .values-grid li { padding: 1.5rem 0.75rem; }
+  .detail-card { padding: 1.5rem 0.75rem; }
+  .song-card { padding: 1.5rem 1rem; }
+
+  .welcome-note {
+    padding-block: 1.5rem;
+    padding-inline: 1rem;
+  }
+
+  .footer-wordmark {
+    font-size: clamp(2.25rem, 13vw, 3.5rem);
+    letter-spacing: 0.03em;
+    margin-bottom: 1.5rem;
+  }
+  .footer-grid { gap: 2rem; padding-block: 1.75rem; }
+  .site-footer {
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
   }
 }
 
