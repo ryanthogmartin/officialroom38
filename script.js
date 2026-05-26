@@ -21,15 +21,18 @@
   var menuToggle = document.querySelector(".menu-toggle");
   var nav = document.getElementById("primary-navigation");
   if (header && menuToggle && nav) {
+    var menuLabel = menuToggle.querySelector(".menu-toggle-label");
     var closeMenu = function () {
       header.classList.remove("menu-open");
       menuToggle.setAttribute("aria-expanded", "false");
       menuToggle.setAttribute("aria-label", "Open navigation menu");
+      if (menuLabel) menuLabel.textContent = "Menu";
     };
     var openMenu = function () {
       header.classList.add("menu-open");
       menuToggle.setAttribute("aria-expanded", "true");
       menuToggle.setAttribute("aria-label", "Close navigation menu");
+      if (menuLabel) menuLabel.textContent = "Close";
     };
 
     menuToggle.addEventListener("click", function () {
