@@ -1174,6 +1174,12 @@ button { font: inherit; cursor: pointer; }
     position: relative;
   }
   .brand-wordmark { font-size: 0.8125rem; }
+  .menu-toggle,
+  .nav-cta {
+    height: 44px;
+    box-sizing: border-box;
+    align-self: center;
+  }
   .menu-toggle {
     min-width: 56px;
     padding: 0 0.7rem;
@@ -1438,7 +1444,7 @@ button { font: inherit; cursor: pointer; }
     letter-spacing: 0.1em;
   }
   .nav-cta {
-    padding: 0.55rem 0.55rem;
+    padding: 0 0.55rem;
     font-size: 0.5625rem;
     letter-spacing: 0.06em;
   }
