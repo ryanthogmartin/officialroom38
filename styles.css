@@ -1679,6 +1679,112 @@ button { font: inherit; cursor: pointer; }
 }
 
 /* ============================================================
+   SWIPE ROW (mobile-only horizontal scroll-snap cards)
+   Used on .pillars, .for-list, .values-grid, .expect-grid via
+   the .swipe-row modifier. Desktop layout is untouched.
+   ============================================================ */
+.swipe-hint { display: none; }
+
+@media (max-width: 819px) {
+  .swipe-hint {
+    display: block;
+    margin: clamp(1.5rem, 1rem + 2vw, 2.25rem) 0 0.65rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+  }
+  .swipe-hint.on-dark { color: var(--muted-on-dark); }
+
+  .swipe-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Bleed to viewport edges so cards align with the section content,
+       while the first/last card snaps inside the gutter. */
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
+    /* Reset borders that the grid layout used. */
+    border-top: 0;
+    border-bottom: 0;
+  }
+  .swipe-row > li {
+    flex: 0 0 78%;
+    max-width: 22rem;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    /* Replace row borders with a single card divider on the right. */
+    border-right: 1px solid var(--rule-soft);
+    border-bottom: 0;
+    margin-right: 1rem;
+  }
+  .swipe-row > li:last-child {
+    margin-right: 0;
+    border-right: 0;
+  }
+  /* Dark sections use the dim rule. */
+  .section-dark .swipe-row > li { border-right-color: var(--rule-dim); }
+
+  /* Keep card content left-aligned inside the swipe row even though
+     the mobile flow centers most blocks. */
+  .swipe-row > li,
+  .swipe-row > li p {
+    text-align: left;
+    align-items: flex-start;
+  }
+  .swipe-row > li p { margin-inline: 0; }
+
+  /* Hide WebKit scrollbar. */
+  .swipe-row::-webkit-scrollbar { display: none; }
+
+  /* Keyboard focus visibility on the row container. */
+  .swipe-row:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
+  .section-dark .swipe-row:focus-visible { outline-color: var(--paper); }
+
+  /* Per-list tuning. */
+  .pillars.swipe-row > li {
+    padding: 1.25rem 1rem 1.25rem 0;
+  }
+  .for-list.swipe-row > li {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 1.25rem 1rem 1.25rem 0;
+    justify-items: flex-start;
+  }
+  .for-list.swipe-row > li:hover {
+    padding-left: 0;
+    background: transparent;
+  }
+  .values-grid.swipe-row > li {
+    padding: 1.25rem 1rem 1.25rem 0;
+    min-height: 0;
+  }
+  .expect-grid.swipe-row > li {
+    padding: 1.25rem 1rem 1.25rem 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swipe-row { scroll-behavior: auto; }
+}
+
+/* ============================================================
    FOCUS STATES (a11y)
    ============================================================ */
 a:focus-visible,
