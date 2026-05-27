@@ -54,17 +54,23 @@
   }
 
   // ============================================================
-  // Calendar CTAs: compute the next Monday in America/Phoenix and
-  // rewrite Apple/iCal + Google Calendar links so they always start
-  // on the upcoming Monday at 7-9 PM local time, weekly.
+  // Calendar CTAs.
   //
-  // "Next Monday" rule: the upcoming Monday at 7 PM Phoenix time.
-  // If today is Monday and the current Phoenix time is before 19:00,
-  // today qualifies. At/after 19:00 on Monday, roll to the following Monday.
+  // Goal: every "Add to calendar" button hands the user a recurring
+  // weekly event that lands on the upcoming Monday, 7-9 PM Phoenix.
+  //
+  // Why one ICS for both buttons: Google Calendar's `render?recur=`
+  // URL parameter is undocumented and unreliable — it routinely lands
+  // as a one-time event on mobile and certain account/browser combos.
+  // The only path that reliably produces a recurring event in BOTH
+  // Apple Calendar and Google Calendar is a downloadable RFC 5545
+  // .ics file. So both buttons trigger the same Blob download.
+  //
+  // "Next Monday" rule: upcoming Monday at 7 PM Phoenix. If today is
+  // Monday and Phoenix time is before 19:00, today qualifies. At/after
+  // 19:00 on Monday, roll to the following Monday.
   // ============================================================
 
-  // Return { year, month (1-12), day, hour, minute, weekday (1=Mon..7=Sun) }
-  // representing `date` rendered in America/Phoenix.
   function phoenixParts(date) {
     // Phoenix is MST year-round (no DST), UTC-7.
     var fmt = new Intl.DateTimeFormat("en-US", {
@@ -92,20 +98,15 @@
     };
   }
 
-  // Compute the next-Monday Y/M/D (Phoenix-local). `now` lets tests inject time.
   function nextMondayPhoenix(now) {
     var p = phoenixParts(now || new Date());
     var offset;
     if (p.weekday === 1) {
-      // Today is Monday in Phoenix: use today if before 7 PM, else +7 days.
       offset = p.hour < 19 ? 0 : 7;
     } else {
-      // weekday 2..7 -> add (8 - weekday) days to reach next Monday
       offset = 8 - p.weekday;
     }
-    // Add `offset` days to the Phoenix calendar date by reconstructing a UTC
-    // midnight for the Phoenix date and shifting in 24h increments. Phoenix
-    // has no DST so day-length is constant.
+    // Phoenix has no DST so day-length is constant — shift by 24h slices.
     var baseUtcMs = Date.UTC(p.year, p.month - 1, p.day);
     var shifted = new Date(baseUtcMs + offset * 86400000);
     return {
@@ -119,16 +120,34 @@
     return n < 10 ? "0" + n : "" + n;
   }
 
-  // YYYYMMDDTHHMMSS — floating local time, used inside DTSTART;TZID= and Google's dates=
-  function formatLocal(ymd, hour, minute) {
+  // Convert a Phoenix local Y/M/D + H:M into a UTC YYYYMMDDTHHMMSSZ stamp.
+  // Phoenix is UTC-7 year-round, so add 7h to local clock time.
+  function phoenixLocalToUtcStamp(ymd, hour, minute) {
+    var utcMs = Date.UTC(ymd.year, ymd.month - 1, ymd.day, hour + 7, minute, 0);
+    var d = new Date(utcMs);
     return (
-      ymd.year +
-      pad2(ymd.month) +
-      pad2(ymd.day) +
+      d.getUTCFullYear() +
+      pad2(d.getUTCMonth() + 1) +
+      pad2(d.getUTCDate()) +
       "T" +
-      pad2(hour) +
-      pad2(minute) +
-      "00"
+      pad2(d.getUTCHours()) +
+      pad2(d.getUTCMinutes()) +
+      pad2(d.getUTCSeconds()) +
+      "Z"
+    );
+  }
+
+  function nowUtcStamp() {
+    var d = new Date();
+    return (
+      d.getUTCFullYear() +
+      pad2(d.getUTCMonth() + 1) +
+      pad2(d.getUTCDate()) +
+      "T" +
+      pad2(d.getUTCHours()) +
+      pad2(d.getUTCMinutes()) +
+      pad2(d.getUTCSeconds()) +
+      "Z"
     );
   }
 
@@ -141,103 +160,75 @@
     uid: "the-table-weekly@officialroom38.com",
   };
 
-  // Google Calendar's `recur` template parameter expects a full RRULE line
-  // (with the `RRULE:` prefix). The value must be sent as a single query
-  // parameter — naive concatenation can let the `;` inside the rule split the
-  // query into separate params, which silently drops the recurrence. We use
-  // URLSearchParams so every value is encoded as one whole param.
-  var GOOGLE_RECUR = "RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=MO";
+  // RFC 5545 text escape for SUMMARY/DESCRIPTION/LOCATION values.
+  function icsEscape(text) {
+    return text
+      .replace(/\\/g, "\\\\")
+      .replace(/;/g, "\\;")
+      .replace(/,/g, "\\,")
+      .replace(/\r\n|\r|\n/g, "\\n");
+  }
 
-  function buildGoogleUrl(ymd) {
-    var start = formatLocal(ymd, 19, 0);
-    var end = formatLocal(ymd, 21, 0);
-    var params = new URLSearchParams();
-    params.set("action", "TEMPLATE");
-    params.set("text", EVENT.title);
-    params.set("dates", start + "/" + end);
-    params.set("ctz", "America/Phoenix");
-    params.set("recur", GOOGLE_RECUR);
-    params.set("details", EVENT.details);
-    params.set("location", EVENT.location);
-    params.set("sf", "true");
-    params.set("output", "xml");
-    return "https://www.google.com/calendar/render?" + params.toString();
+  // RFC 5545 §3.1 line folding: no line may exceed 75 octets. Continuation
+  // lines start with a single space. We fold by character count (close
+  // enough — ICS content here is ASCII except for the middle dot in the
+  // title, and conservative folding leaves headroom for the 2-byte UTF-8).
+  function foldLine(line) {
+    if (line.length <= 75) return line;
+    var out = line.substring(0, 75);
+    var rest = line.substring(75);
+    while (rest.length > 74) {
+      out += "\r\n " + rest.substring(0, 74);
+      rest = rest.substring(74);
+    }
+    if (rest.length) out += "\r\n " + rest;
+    return out;
   }
 
   function buildIcs(ymd) {
-    var start = formatLocal(ymd, 19, 0);
-    var end = formatLocal(ymd, 21, 0);
-    // DTSTAMP must be UTC.
-    var nowUtc = new Date();
-    var dtstamp =
-      nowUtc.getUTCFullYear() +
-      pad2(nowUtc.getUTCMonth() + 1) +
-      pad2(nowUtc.getUTCDate()) +
-      "T" +
-      pad2(nowUtc.getUTCHours()) +
-      pad2(nowUtc.getUTCMinutes()) +
-      pad2(nowUtc.getUTCSeconds()) +
-      "Z";
-    // ICS DESCRIPTION needs commas escaped and newlines as \n.
-    var icsDescription = EVENT.details
-      .replace(/\\/g, "\\\\")
-      .replace(/,/g, "\\,")
-      .replace(/;/g, "\\;")
-      .replace(/\n/g, "\\n");
-    return [
+    var dtstart = phoenixLocalToUtcStamp(ymd, 19, 0);
+    var dtend = phoenixLocalToUtcStamp(ymd, 21, 0);
+    var dtstamp = nowUtcStamp();
+    var lines = [
       "BEGIN:VCALENDAR",
       "VERSION:2.0",
       "PRODID:-//Room 38//The Table//EN",
       "CALSCALE:GREGORIAN",
       "METHOD:PUBLISH",
-      "BEGIN:VTIMEZONE",
-      "TZID:America/Phoenix",
-      "X-LIC-LOCATION:America/Phoenix",
-      "BEGIN:STANDARD",
-      "TZOFFSETFROM:-0700",
-      "TZOFFSETTO:-0700",
-      "TZNAME:MST",
-      "DTSTART:19700101T000000",
-      "END:STANDARD",
-      "END:VTIMEZONE",
       "BEGIN:VEVENT",
       "UID:" + EVENT.uid,
       "DTSTAMP:" + dtstamp,
-      "SUMMARY:" + EVENT.title,
-      "DESCRIPTION:" + icsDescription,
+      "DTSTART:" + dtstart,
+      "DTEND:" + dtend,
+      "RRULE:FREQ=WEEKLY;INTERVAL=1;WKST=SU",
+      "SUMMARY:" + icsEscape(EVENT.title),
+      "DESCRIPTION:" + icsEscape(EVENT.details),
+      "LOCATION:" + icsEscape(EVENT.location),
       "URL:" + EVENT.url,
-      "LOCATION:" + EVENT.location,
-      "DTSTART;TZID=America/Phoenix:" + start,
-      "DTEND;TZID=America/Phoenix:" + end,
-      "RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=MO",
+      "STATUS:CONFIRMED",
+      "TRANSP:OPAQUE",
+      "SEQUENCE:0",
       "END:VEVENT",
       "END:VCALENDAR",
       "",
-    ].join("\r\n");
+    ];
+    return lines.map(foldLine).join("\r\n");
   }
 
   function updateCalendarLinks() {
     var ymd = nextMondayPhoenix();
+    var icsLinks = document.querySelectorAll("[data-calendar-ics], [data-calendar-google]");
+    if (!icsLinks.length) return;
+    if (typeof Blob === "undefined" || typeof URL === "undefined" || !URL.createObjectURL) return;
 
-    // Google Calendar links
-    var googleUrl = buildGoogleUrl(ymd);
-    var googleLinks = document.querySelectorAll("[data-calendar-google]");
-    for (var i = 0; i < googleLinks.length; i++) {
-      googleLinks[i].setAttribute("href", googleUrl);
-    }
-
-    // Apple/iCal links — generate a Blob URL with the dynamic .ics file
-    var icsLinks = document.querySelectorAll("[data-calendar-ics]");
-    if (icsLinks.length && typeof Blob !== "undefined" && typeof URL !== "undefined" && URL.createObjectURL) {
-      var ics = buildIcs(ymd);
-      var blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
-      var url = URL.createObjectURL(blob);
-      var filename =
-        "room38-the-table-" + ymd.year + pad2(ymd.month) + pad2(ymd.day) + ".ics";
-      for (var j = 0; j < icsLinks.length; j++) {
-        icsLinks[j].setAttribute("href", url);
-        icsLinks[j].setAttribute("download", filename);
-      }
+    var ics = buildIcs(ymd);
+    var blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var filename =
+      "room38-the-table-" + ymd.year + pad2(ymd.month) + pad2(ymd.day) + ".ics";
+    for (var i = 0; i < icsLinks.length; i++) {
+      icsLinks[i].setAttribute("href", url);
+      icsLinks[i].setAttribute("download", filename);
     }
   }
 
@@ -248,7 +239,6 @@
     window.__room38Calendar = {
       phoenixParts: phoenixParts,
       nextMondayPhoenix: nextMondayPhoenix,
-      buildGoogleUrl: buildGoogleUrl,
       buildIcs: buildIcs,
     };
   }

@@ -53,10 +53,10 @@ function assert(cond, msg) {
 }
 
 // ---------- nextMondayPhoenix ----------
+console.log("nextMondayPhoenix");
 
 // Tue 2026-05-26 -> Mon 2026-06-01. Pick mid-day UTC; Phoenix is UTC-7, so
 // 18:00Z on Tue is 11:00 Phoenix Tue.
-console.log("nextMondayPhoenix");
 {
   const ymd = cal.nextMondayPhoenix(new Date(Date.UTC(2026, 4, 26, 18, 0, 0)));
   assert(
@@ -93,58 +93,153 @@ console.log("nextMondayPhoenix");
   );
 }
 
-// ---------- buildGoogleUrl ----------
-console.log("buildGoogleUrl");
-{
-  const url = cal.buildGoogleUrl({ year: 2026, month: 6, day: 1 });
-  const parsed = new URL(url);
-  const params = parsed.searchParams;
-
-  assert(parsed.origin + parsed.pathname === "https://www.google.com/calendar/render", "URL points to Google Calendar render");
-  assert(params.get("action") === "TEMPLATE", "action=TEMPLATE present");
-  assert(params.get("dates") === "20260601T190000/20260601T210000", "dates spans 7-9 PM on 2026-06-01");
-  assert(params.get("ctz") === "America/Phoenix", "ctz is America/Phoenix");
-  assert(params.get("recur") === "RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=MO", "recur parses back to full RRULE with WKST=SU");
-
-  // The RRULE must survive as a single param. After encoding, the ';' must
-  // be '%3B' so it doesn't split the query string into orphan params.
-  assert(/[?&]recur=RRULE%3AFREQ%3DWEEKLY%3BWKST%3DSU%3BBYDAY%3DMO(?:&|$)/.test(url), "recur appears once with semicolons encoded as %3B");
-  assert(!/[?&]BYDAY=MO/.test(url), "BYDAY=MO is NOT a separate query param");
-  assert(!/[?&]WKST=SU/.test(url), "WKST=SU is NOT a separate query param");
-}
-
-{
-  // 2026-05-26 dynamic example -> Mon 2026-06-01 starting date in URL
-  const ymd = cal.nextMondayPhoenix(new Date(Date.UTC(2026, 4, 26, 18, 0, 0)));
-  const url = cal.buildGoogleUrl(ymd);
-  assert(url.indexOf("dates=20260601T190000%2F20260601T210000") !== -1 || url.indexOf("dates=20260601T190000/20260601T210000") !== -1, "Google URL for 2026-05-26 input uses dates=2026-06-01 7-9pm");
-  assert(url.indexOf("recur=RRULE%3AFREQ%3DWEEKLY%3BWKST%3DSU%3BBYDAY%3DMO") !== -1, "Google URL contains encoded weekly recur");
-}
-
-{
-  // 2026-06-01 at 19:00 Phoenix -> next Mon 2026-06-08
-  const ymd = cal.nextMondayPhoenix(new Date(Date.UTC(2026, 5, 2, 2, 0, 0)));
-  const url = cal.buildGoogleUrl(ymd);
-  assert(url.indexOf("20260608T190000") !== -1, "Google URL for Mon 19:00 input uses dates=2026-06-08");
-  assert(url.indexOf("recur=RRULE%3AFREQ%3DWEEKLY%3BWKST%3DSU%3BBYDAY%3DMO") !== -1, "Google URL still recurring weekly on rollover");
-}
-
 // ---------- buildIcs ----------
 console.log("buildIcs");
-{
-  const ics = cal.buildIcs({ year: 2026, month: 6, day: 1 });
-  assert(ics.indexOf("DTSTART;TZID=America/Phoenix:20260601T190000") !== -1, "ICS DTSTART uses Phoenix TZ at 7pm on 2026-06-01");
-  assert(ics.indexOf("DTEND;TZID=America/Phoenix:20260601T210000") !== -1, "ICS DTEND uses Phoenix TZ at 9pm on 2026-06-01");
-  assert(ics.indexOf("RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=MO") !== -1, "ICS contains weekly RRULE on Mondays");
-  assert(ics.indexOf("BEGIN:VTIMEZONE") !== -1 && ics.indexOf("TZID:America/Phoenix") !== -1, "ICS embeds the Phoenix VTIMEZONE block");
+
+// Helper: unfold RFC 5545 line folding so we can grep cleanly.
+function unfold(ics) {
+  return ics.replace(/\r\n[ \t]/g, "");
 }
 
 {
-  // 2026-06-01 at 19:00 Phoenix -> ICS DTSTART = 20260608T190000
+  const ics = cal.buildIcs({ year: 2026, month: 6, day: 1 });
+  const unfolded = unfold(ics);
+
+  // Phoenix 7 PM on Mon 2026-06-01 in UTC = 02:00 Tue 2026-06-02.
+  assert(
+    unfolded.indexOf("DTSTART:20260602T020000Z") !== -1,
+    "ICS DTSTART is UTC: 20260602T020000Z (7pm Phoenix Mon 06-01)"
+  );
+  assert(
+    unfolded.indexOf("DTEND:20260602T040000Z") !== -1,
+    "ICS DTEND is UTC: 20260602T040000Z (9pm Phoenix Mon 06-01)"
+  );
+  assert(
+    unfolded.indexOf("RRULE:FREQ=WEEKLY;INTERVAL=1;WKST=SU") !== -1,
+    "ICS contains weekly RRULE (no BYDAY — repeats every 7 days from DTSTART)"
+  );
+  assert(
+    /\r\nRRULE:[^\r\n]*\r\n/.test(unfolded) && !/\r\nRRULE:[^\r\n]*BYDAY/.test(unfolded),
+    "ICS RRULE has no BYDAY (would conflict with UTC DTSTART on Tuesday)"
+  );
+  assert(
+    unfolded.indexOf("UID:the-table-weekly@officialroom38.com") !== -1,
+    "ICS contains stable UID"
+  );
+  assert(
+    /\r\nDTSTAMP:\d{8}T\d{6}Z/.test(unfolded),
+    "ICS DTSTAMP is present and UTC"
+  );
+  assert(
+    unfolded.indexOf("BEGIN:VCALENDAR") === 0,
+    "ICS starts with BEGIN:VCALENDAR"
+  );
+  assert(
+    /END:VCALENDAR\r\n$/.test(ics),
+    "ICS ends with END:VCALENDAR followed by CRLF"
+  );
+  assert(
+    !/(^|[^\r])\n/.test(ics) && ics.indexOf("\r\n") !== -1,
+    "ICS uses CRLF line endings (no lone LF)"
+  );
+}
+
+// Line folding: no raw line in the ICS exceeds 75 octets.
+{
+  const ics = cal.buildIcs({ year: 2026, month: 6, day: 1 });
+  const rawLines = ics.split("\r\n");
+  const tooLong = rawLines.filter((l) => Buffer.byteLength(l, "utf8") > 75);
+  assert(
+    tooLong.length === 0,
+    "Every ICS line is <= 75 octets (folded) — offenders: " +
+      JSON.stringify(tooLong)
+  );
+}
+
+// 2026-06-01 at 19:00 Phoenix -> ICS DTSTART rolls to 2026-06-08 / 02:00Z 06-09
+{
   const ymd = cal.nextMondayPhoenix(new Date(Date.UTC(2026, 5, 2, 2, 0, 0)));
-  const ics = cal.buildIcs(ymd);
-  assert(ics.indexOf("DTSTART;TZID=America/Phoenix:20260608T190000") !== -1, "ICS rolls DTSTART to 2026-06-08 at the 7pm boundary");
-  assert(ics.indexOf("RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=MO") !== -1, "ICS still weekly recurring on rollover");
+  const ics = unfold(cal.buildIcs(ymd));
+  assert(
+    ics.indexOf("DTSTART:20260609T020000Z") !== -1,
+    "ICS rolls DTSTART to Tue 2026-06-09 02:00Z (= Mon 06-08 7pm Phoenix)"
+  );
+  assert(
+    ics.indexOf("RRULE:FREQ=WEEKLY;INTERVAL=1;WKST=SU") !== -1,
+    "ICS still weekly recurring on rollover"
+  );
+}
+
+// ---------- Static ICS file ----------
+console.log("static assets/room38-the-table.ics");
+{
+  const icsPath = path.join(__dirname, "..", "assets", "room38-the-table.ics");
+  const raw = fs.readFileSync(icsPath, "utf8");
+  const unfolded = unfold(raw);
+
+  assert(raw.indexOf("\r\n") !== -1, "static ICS uses CRLF");
+  assert(
+    unfolded.indexOf("RRULE:FREQ=WEEKLY;INTERVAL=1;WKST=SU") !== -1,
+    "static ICS contains weekly RRULE (no BYDAY — repeats every 7 days from DTSTART)"
+  );
+  assert(
+    !/\r\nRRULE:[^\r\n]*BYDAY/.test(unfolded),
+    "static ICS RRULE has no BYDAY"
+  );
+  assert(
+    /\r\nDTSTART:\d{8}T\d{6}Z\r\n/.test(unfolded),
+    "static ICS DTSTART is a UTC timestamp"
+  );
+  assert(
+    /\r\nDTEND:\d{8}T\d{6}Z\r\n/.test(unfolded),
+    "static ICS DTEND is a UTC timestamp"
+  );
+  assert(
+    unfolded.indexOf("UID:the-table-weekly@officialroom38.com") !== -1,
+    "static ICS UID matches dynamic UID"
+  );
+
+  // No raw line exceeds 75 octets.
+  const tooLong = raw.split("\r\n").filter((l) => Buffer.byteLength(l, "utf8") > 75);
+  assert(
+    tooLong.length === 0,
+    "static ICS every line <= 75 octets — offenders: " + JSON.stringify(tooLong)
+  );
+}
+
+// ---------- HTML wiring ----------
+// Both Apple AND Google buttons must carry data-calendar-* attributes and
+// point at the ICS asset so script.js can hand them the recurring Blob.
+console.log("HTML calendar buttons");
+{
+  const html = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
+
+  assert(
+    html.indexOf("data-calendar-ics") !== -1,
+    "index.html has at least one [data-calendar-ics] anchor"
+  );
+  assert(
+    html.indexOf("data-calendar-google") !== -1,
+    "index.html has at least one [data-calendar-google] anchor"
+  );
+  assert(
+    html.indexOf("calendar/render") === -1,
+    "index.html no longer points anything at Google calendar/render (which loses recurrence)"
+  );
+
+  // The Google button's initial href must be the ICS file too — so even
+  // before script.js runs, it downloads the recurring invite.
+  const googleAnchorMatch = html.match(/<a[^>]*data-calendar-google[^>]*>/);
+  assert(
+    googleAnchorMatch && /href="[^"]*room38-the-table\.ics"/.test(googleAnchorMatch[0]),
+    "Google button href fallback is the ICS file (got: " +
+      (googleAnchorMatch ? googleAnchorMatch[0] : "no match") +
+      ")"
+  );
+  assert(
+    googleAnchorMatch && /download="[^"]*\.ics"/.test(googleAnchorMatch[0]),
+    "Google button has download attribute so it saves as .ics"
+  );
 }
 
 console.log("\n" + passed + " passed, " + failed + " failed");

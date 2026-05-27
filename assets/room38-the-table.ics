@@ -3,25 +3,20 @@ VERSION:2.0
 PRODID:-//Room 38//The Table//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-BEGIN:VTIMEZONE
-TZID:America/Phoenix
-X-LIC-LOCATION:America/Phoenix
-BEGIN:STANDARD
-TZOFFSETFROM:-0700
-TZOFFSETTO:-0700
-TZNAME:MST
-DTSTART:19700101T000000
-END:STANDARD
-END:VTIMEZONE
 BEGIN:VEVENT
 UID:the-table-weekly@officialroom38.com
-DTSTAMP:20260101T000000Z
+DTSTAMP:20260527T000000Z
+DTSTART:20260602T020000Z
+DTEND:20260602T040000Z
+RRULE:FREQ=WEEKLY;INTERVAL=1;WKST=SU
 SUMMARY:Room 38 · The Table
-DESCRIPTION:A Bible study gathering called The Table. Worship\, teaching from the Word\, and time around the table together. Bring a Bible and the season you're in.\n\nRSVP: https://officialroom38.com/#join
-URL:https://officialroom38.com/
+DESCRIPTION:A Bible study gathering called The Table. Worship\, teaching fr
+ om the Word\, and time around the table together. Bring a Bible and the se
+ ason you're in.\n\nRSVP: https://officialroom38.com/#join
 LOCATION:Address shared with confirmed guests after RSVP
-DTSTART;TZID=America/Phoenix:20260105T190000
-DTEND;TZID=America/Phoenix:20260105T210000
-RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=MO
+URL:https://officialroom38.com/
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+SEQUENCE:0
 END:VEVENT
 END:VCALENDAR
