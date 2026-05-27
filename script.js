@@ -56,15 +56,9 @@
   // ============================================================
   // Calendar CTAs.
   //
-  // Goal: every "Add to calendar" button hands the user a recurring
-  // weekly event that lands on the upcoming Monday, 7-9 PM Phoenix.
-  //
-  // Why one ICS for both buttons: Google Calendar's `render?recur=`
-  // URL parameter is undocumented and unreliable — it routinely lands
-  // as a one-time event on mobile and certain account/browser combos.
-  // The only path that reliably produces a recurring event in BOTH
-  // Apple Calendar and Google Calendar is a downloadable RFC 5545
-  // .ics file. So both buttons trigger the same Blob download.
+  // Apple/iCal: download a recurring weekly RFC 5545 .ics file.
+  // Google: open the Google Calendar template URL in a new tab with
+  // a weekly RRULE prefilled — no download, no import step.
   //
   // "Next Monday" rule: upcoming Monday at 7 PM Phoenix. If today is
   // Monday and Phoenix time is before 19:00, today qualifies. At/after
@@ -215,9 +209,41 @@
     return lines.map(foldLine).join("\r\n");
   }
 
+  // Build a Google Calendar template URL that prefills the weekly event.
+  // Google reads `dates` as UTC stamps and applies `recur` (an RRULE) in
+  // the event's local timezone — we use `ctz=America/Phoenix` so the
+  // BYDAY=MO rule lands on Monday Phoenix-local, not on the UTC date
+  // (which is Tuesday for a 7-9 PM Phoenix event).
+  function buildGoogleUrl(ymd) {
+    var dtstart = phoenixLocalToUtcStamp(ymd, 19, 0);
+    var dtend = phoenixLocalToUtcStamp(ymd, 21, 0);
+    var params = new URLSearchParams({
+      action: "TEMPLATE",
+      text: EVENT.title,
+      dates: dtstart + "/" + dtend,
+      details: EVENT.details,
+      location: EVENT.location,
+      ctz: "America/Phoenix",
+      recur: "RRULE:FREQ=WEEKLY;INTERVAL=1;WKST=SU;BYDAY=MO",
+    });
+    return "https://calendar.google.com/calendar/render?" + params.toString();
+  }
+
   function updateCalendarLinks() {
     var ymd = nextMondayPhoenix();
-    var icsLinks = document.querySelectorAll("[data-calendar-ics], [data-calendar-google]");
+
+    var googleLinks = document.querySelectorAll("[data-calendar-google]");
+    if (googleLinks.length) {
+      var googleUrl = buildGoogleUrl(ymd);
+      for (var g = 0; g < googleLinks.length; g++) {
+        googleLinks[g].setAttribute("href", googleUrl);
+        googleLinks[g].removeAttribute("download");
+        googleLinks[g].setAttribute("target", "_blank");
+        googleLinks[g].setAttribute("rel", "noopener");
+      }
+    }
+
+    var icsLinks = document.querySelectorAll("[data-calendar-ics]");
     if (!icsLinks.length) return;
     if (typeof Blob === "undefined" || typeof URL === "undefined" || !URL.createObjectURL) return;
 
@@ -240,6 +266,7 @@
       phoenixParts: phoenixParts,
       nextMondayPhoenix: nextMondayPhoenix,
       buildIcs: buildIcs,
+      buildGoogleUrl: buildGoogleUrl,
     };
   }
 })();

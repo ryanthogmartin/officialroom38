@@ -208,8 +208,9 @@ console.log("static assets/room38-the-table.ics");
 }
 
 // ---------- HTML wiring ----------
-// Both Apple AND Google buttons must carry data-calendar-* attributes and
-// point at the ICS asset so script.js can hand them the recurring Blob.
+// Apple buttons download the recurring ICS. Google buttons open the
+// Google Calendar template URL in a new tab with the RRULE prefilled
+// — no download, no import step.
 console.log("HTML calendar buttons");
 {
   const html = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
@@ -222,23 +223,86 @@ console.log("HTML calendar buttons");
     html.indexOf("data-calendar-google") !== -1,
     "index.html has at least one [data-calendar-google] anchor"
   );
-  assert(
-    html.indexOf("calendar/render") === -1,
-    "index.html no longer points anything at Google calendar/render (which loses recurrence)"
-  );
 
-  // The Google button's initial href must be the ICS file too — so even
-  // before script.js runs, it downloads the recurring invite.
-  const googleAnchorMatch = html.match(/<a[^>]*data-calendar-google[^>]*>/);
+  // The Apple/iCal anchor still points at the recurring .ics download.
+  const appleAnchorMatch = html.match(/<a[^>]*data-calendar-ics[^>]*>/);
   assert(
-    googleAnchorMatch && /href="[^"]*room38-the-table\.ics"/.test(googleAnchorMatch[0]),
-    "Google button href fallback is the ICS file (got: " +
-      (googleAnchorMatch ? googleAnchorMatch[0] : "no match") +
+    appleAnchorMatch && /href="[^"]*room38-the-table\.ics"/.test(appleAnchorMatch[0]),
+    "Apple button href fallback is the ICS file (got: " +
+      (appleAnchorMatch ? appleAnchorMatch[0] : "no match") +
       ")"
   );
   assert(
-    googleAnchorMatch && /download="[^"]*\.ics"/.test(googleAnchorMatch[0]),
-    "Google button has download attribute so it saves as .ics"
+    appleAnchorMatch && /download="[^"]*\.ics"/.test(appleAnchorMatch[0]),
+    "Apple button keeps download attribute so it saves as .ics"
+  );
+
+  // Every Google anchor: points at calendar/render, carries a URL-encoded
+  // weekly RRULE in the recur param, opens in a new tab, and never sets
+  // a download attribute.
+  const googleAnchorRe = /<a[^>]*data-calendar-google[^>]*>/g;
+  const googleAnchors = html.match(googleAnchorRe) || [];
+  assert(
+    googleAnchors.length >= 1,
+    "index.html has at least one rendered Google anchor"
+  );
+  googleAnchors.forEach((tag, idx) => {
+    assert(
+      /href="https:\/\/calendar\.google\.com\/calendar\/render\?[^"]+"/.test(tag),
+      "Google anchor #" + idx + " href points at calendar/render (got: " + tag + ")"
+    );
+    assert(
+      /recur=RRULE%3AFREQ%3DWEEKLY%3BINTERVAL%3D1%3BWKST%3DSU%3BBYDAY%3DMO/.test(tag),
+      "Google anchor #" + idx + " encodes the weekly RRULE in the recur param"
+    );
+    assert(
+      /target="_blank"/.test(tag),
+      "Google anchor #" + idx + " opens in a new tab"
+    );
+    assert(
+      !/\bdownload=/.test(tag),
+      "Google anchor #" + idx + " has no download attribute (got: " + tag + ")"
+    );
+  });
+}
+
+// ---------- buildGoogleUrl ----------
+console.log("buildGoogleUrl");
+{
+  const url = cal.buildGoogleUrl({ year: 2026, month: 6, day: 1 });
+  assert(
+    url.indexOf("https://calendar.google.com/calendar/render?") === 0,
+    "Google URL starts with calendar/render?action=TEMPLATE (got: " + url + ")"
+  );
+
+  const parsed = new URL(url);
+  const params = parsed.searchParams;
+
+  assert(params.get("action") === "TEMPLATE", "action=TEMPLATE");
+  assert(params.get("text") === "Room 38 · The Table", "text is the event title");
+  assert(
+    params.get("dates") === "20260602T020000Z/20260602T040000Z",
+    "dates is UTC 7-9pm Phoenix on Mon 2026-06-01 (got: " + params.get("dates") + ")"
+  );
+  assert(
+    params.get("recur") === "RRULE:FREQ=WEEKLY;INTERVAL=1;WKST=SU;BYDAY=MO",
+    "recur is the weekly RRULE with BYDAY=MO (decoded: " + params.get("recur") + ")"
+  );
+  assert(params.get("ctz") === "America/Phoenix", "ctz=America/Phoenix");
+
+  // The recur param must be percent-encoded in the raw URL string —
+  // verifies URLSearchParams handled the colons / semicolons / equals.
+  assert(
+    url.indexOf("recur=RRULE%3AFREQ%3DWEEKLY%3BINTERVAL%3D1%3BWKST%3DSU%3BBYDAY%3DMO") !== -1,
+    "raw URL contains percent-encoded recur RRULE"
+  );
+
+  // Roll-forward: 2026-06-01 19:00 Phoenix should advance the Google URL too.
+  const ymd = cal.nextMondayPhoenix(new Date(Date.UTC(2026, 5, 2, 2, 0, 0)));
+  const rolled = cal.buildGoogleUrl(ymd);
+  assert(
+    new URL(rolled).searchParams.get("dates") === "20260609T020000Z/20260609T040000Z",
+    "Google URL rolls forward to Mon 2026-06-08 when Mon 19:00 Phoenix has passed"
   );
 }
 
