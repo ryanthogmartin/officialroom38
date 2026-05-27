@@ -141,21 +141,27 @@
     uid: "the-table-weekly@officialroom38.com",
   };
 
+  // Google Calendar's `recur` template parameter expects a full RRULE line
+  // (with the `RRULE:` prefix). The value must be sent as a single query
+  // parameter — naive concatenation can let the `;` inside the rule split the
+  // query into separate params, which silently drops the recurrence. We use
+  // URLSearchParams so every value is encoded as one whole param.
+  var GOOGLE_RECUR = "RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=MO";
+
   function buildGoogleUrl(ymd) {
     var start = formatLocal(ymd, 19, 0);
     var end = formatLocal(ymd, 21, 0);
-    var params = [
-      "action=TEMPLATE",
-      "text=" + encodeURIComponent(EVENT.title),
-      "dates=" + start + "/" + end,
-      "ctz=America/Phoenix",
-      "recur=" + encodeURIComponent("RRULE:FREQ=WEEKLY;BYDAY=MO"),
-      "details=" + encodeURIComponent(EVENT.details),
-      "location=" + encodeURIComponent(EVENT.location),
-      "sf=true",
-      "output=xml",
-    ];
-    return "https://www.google.com/calendar/render?" + params.join("&");
+    var params = new URLSearchParams();
+    params.set("action", "TEMPLATE");
+    params.set("text", EVENT.title);
+    params.set("dates", start + "/" + end);
+    params.set("ctz", "America/Phoenix");
+    params.set("recur", GOOGLE_RECUR);
+    params.set("details", EVENT.details);
+    params.set("location", EVENT.location);
+    params.set("sf", "true");
+    params.set("output", "xml");
+    return "https://www.google.com/calendar/render?" + params.toString();
   }
 
   function buildIcs(ymd) {
@@ -203,7 +209,7 @@
       "LOCATION:" + EVENT.location,
       "DTSTART;TZID=America/Phoenix:" + start,
       "DTEND;TZID=America/Phoenix:" + end,
-      "RRULE:FREQ=WEEKLY;BYDAY=MO",
+      "RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=MO",
       "END:VEVENT",
       "END:VCALENDAR",
       "",
