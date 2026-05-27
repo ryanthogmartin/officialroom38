@@ -350,6 +350,7 @@ button { font: inherit; cursor: pointer; }
   height: calc(2rem + 0.875rem * 1.55); /* padding-block:1rem*2 + line-height */
   border-block: 1px solid var(--ink);
   overflow: hidden;
+  contain: layout paint size;
   background: var(--paper-2);
 }
 .strip-track {
