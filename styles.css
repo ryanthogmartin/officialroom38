@@ -768,38 +768,68 @@ button { font: inherit; cursor: pointer; }
 }
 
 /* ============================================================
-   JOIN / TYPEFORM (dark)
+   JOIN / RSVP (dark)
    ============================================================ */
 .join-head { margin-bottom: clamp(2rem, 1.5rem + 2vw, 3rem); max-width: 56ch; }
-.typeform-wrap {
-  background: var(--paper);
+
+.rsvp-card {
   border: 1px solid var(--paper);
+  background: transparent;
+  padding: clamp(1.5rem, 1rem + 3vw, 3rem);
+  max-width: 38rem;
+}
+.rsvp-card-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.rsvp-card-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--paper);
+  opacity: 0.7;
+}
+.rsvp-card-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.125rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+  margin: 0;
+}
+.rsvp-card-list {
+  list-style: none;
+  margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.85);
 }
-.typeform-frame {
-  width: 100%;
-  height: clamp(560px, 70vh, 760px);
-  background: var(--paper);
-  overflow: hidden;
+.rsvp-card-list li { padding: 0; }
+.rsvp-card-list span { display: inline-block; margin-right: 0.4rem; opacity: 0.55; }
+.rsvp-card-btn {
+  margin-top: 0.5rem;
+  cursor: pointer;
+  align-self: flex-start;
 }
-.typeform-frame iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-}
-.form-fallback {
-  margin: 1rem 0 0;
-  font-size: 0.875rem;
+.rsvp-card-fallback {
+  margin: 0;
+  font-size: 0.8125rem;
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.7);
 }
-.form-fallback a {
+.rsvp-card-fallback a {
   color: var(--paper);
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   padding-bottom: 1px;
 }
-.form-fallback a:hover { border-bottom-color: var(--paper); }
+.rsvp-card-fallback a:hover { border-bottom-color: var(--paper); }
 
 /* ============================================================
    INSTAGRAM
@@ -1570,11 +1600,14 @@ button { font: inherit; cursor: pointer; }
   }
   .detail-card:first-child { padding-top: 1.75rem; }
 
-  .typeform-wrap {
-    margin-inline: calc(var(--gutter) * -0.25);
+  .rsvp-card {
+    padding: 1.5rem;
+    width: 100%;
+    max-width: none;
   }
-  .typeform-frame {
-    height: min(720px, 78vh);
+  .rsvp-card-btn {
+    width: 100%;
+    align-self: stretch;
   }
 
   .instagram-embed-shell {
@@ -1657,8 +1690,8 @@ button { font: inherit; cursor: pointer; }
   .worship-page-embed iframe {
     height: 352px;
   }
-  .typeform-wrap {
-    margin-inline: 0;
+  .rsvp-card {
+    padding: 1.25rem;
   }
 }
 
@@ -1835,5 +1868,5 @@ button:focus-visible,
    PRINT
    ============================================================ */
 @media print {
-  .site-header, .strip, .typeform-wrap, .instagram-embed-shell { display: none; }
+  .site-header, .strip, .rsvp-card, .instagram-embed-shell { display: none; }
 }
