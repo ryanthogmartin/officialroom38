@@ -17,6 +17,17 @@
   to = "/worship/"
   status = 301
 
+# Clean URL for /week-one/ — recap page for the first night around the table.
+[[redirects]]
+  from = "/week-one/"
+  to = "/week-one.html"
+  status = 200
+
+[[redirects]]
+  from = "/week-one"
+  to = "/week-one/"
+  status = 301
+
 # Branded custom 404 for any unmatched path.
 [[redirects]]
   from = "/*"

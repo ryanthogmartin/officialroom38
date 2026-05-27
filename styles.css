@@ -1745,6 +1745,160 @@ button { font: inherit; cursor: pointer; }
 }
 
 /* ============================================================
+   WEEK ONE — homepage moment + recap page
+   Editorial photo strip: featured photo, mobile-swipe filmstrip,
+   recap-page hero + tasteful gallery. Black & white frame, thin
+   rules. No lightbox. Native CSS scroll-snap.
+   ============================================================ */
+.section-weekone {
+  background: var(--paper);
+}
+.weekone-head {
+  margin-bottom: clamp(2rem, 1.25rem + 2vw, 3.25rem);
+  max-width: 60ch;
+}
+.weekone-head .section-sub { max-width: 56ch; }
+
+.weekone-feature {
+  margin: 0 0 clamp(1.25rem, 0.75rem + 1.5vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  border-top: 1px solid var(--ink);
+  padding-top: clamp(1rem, 0.75rem + 1vw, 1.5rem);
+}
+.weekone-feature img {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--paper-warm);
+}
+.weekone-feature figcaption {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Editorial filmstrip — desktop = even row, mobile = swipe. */
+.weekone-strip {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: clamp(0.5rem, 0.25rem + 0.6vw, 0.875rem);
+  border-top: 1px solid var(--rule-soft);
+  padding-top: clamp(1rem, 0.75rem + 1vw, 1.5rem);
+}
+.weekone-strip li {
+  margin: 0;
+  padding: 0;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--paper-warm);
+}
+.weekone-strip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+.weekone-strip li:hover img,
+.weekone-strip li:focus-within img { opacity: 0.86; }
+
+.weekone-cta {
+  margin-top: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* ============================================================
+   WEEK ONE RECAP PAGE
+   ============================================================ */
+.weekone-page-hero {
+  padding: clamp(2.5rem, 2rem + 2vw, 4.5rem) 0 clamp(2rem, 1.5rem + 1.5vw, 3rem);
+  background: var(--paper-warm);
+  border-bottom: 1px solid var(--rule-soft);
+}
+.weekone-page-hero .weekone-back {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: clamp(1.25rem, 1rem + 1vw, 2rem);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+}
+.weekone-page-hero .weekone-back:hover { border-bottom-color: var(--ink); color: var(--ink); }
+.weekone-page-hero .section-eyebrow { margin-top: 0; }
+.weekone-page-hero .section-title { max-width: 22ch; }
+.weekone-page-hero .section-sub { max-width: 60ch; }
+
+.weekone-hero-figure {
+  margin: clamp(1.75rem, 1.25rem + 2vw, 3rem) 0 0;
+  border-top: 1px solid var(--ink);
+  padding-top: clamp(1rem, 0.75rem + 1vw, 1.5rem);
+}
+.weekone-hero-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--paper);
+}
+.weekone-hero-figure figcaption {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.65rem;
+}
+
+.section-weekone-gallery { background: var(--paper); }
+.weekone-gallery-intro {
+  max-width: 60ch;
+  margin-bottom: clamp(1.5rem, 1rem + 2vw, 2.75rem);
+}
+
+.weekone-gallery {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.75rem, 0.5rem + 0.8vw, 1.25rem);
+}
+@media (max-width: 819px) {
+  .weekone-gallery { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .weekone-gallery { grid-template-columns: 1fr; }
+}
+.weekone-gallery li {
+  margin: 0;
+  padding: 0;
+  background: var(--paper-warm);
+  overflow: hidden;
+}
+.weekone-gallery li.is-wide { grid-column: span 2; }
+@media (max-width: 480px) {
+  .weekone-gallery li.is-wide { grid-column: auto; }
+}
+.weekone-gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================================================
    SWIPE ROW (mobile-only horizontal scroll-snap cards)
    Used on .pillars, .for-list, .values-grid, .expect-grid via
    the .swipe-row modifier. Desktop layout is untouched.
@@ -1848,6 +2002,54 @@ button { font: inherit; cursor: pointer; }
 
 @media (prefers-reduced-motion: reduce) {
   .swipe-row { scroll-behavior: auto; }
+}
+
+/* Week One filmstrip — desktop is a 7-up grid; mobile becomes a
+   bleed-to-edge swipe gallery. Kept separate from .swipe-row because
+   the cards are pure images (no text) and snap differently. */
+@media (max-width: 819px) {
+  .section-weekone .weekone-head {
+    text-align: center;
+    margin-inline: auto;
+  }
+  .section-weekone .weekone-head .section-sub {
+    margin-inline: auto;
+  }
+  .weekone-cta { justify-content: center; }
+  .weekone-cta .btn { width: min(100%, 22rem); }
+
+  .weekone-strip {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.65rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
+    border-top: 0;
+    padding-top: 0;
+  }
+  .weekone-strip::-webkit-scrollbar { display: none; }
+  .weekone-strip:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
+  .weekone-strip > li {
+    flex: 0 0 68%;
+    max-width: 18rem;
+    aspect-ratio: 3 / 4;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .weekone-strip { scroll-behavior: auto; }
 }
 
 /* ============================================================
