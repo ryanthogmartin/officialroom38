@@ -1243,7 +1243,31 @@ button { font: inherit; cursor: pointer; }
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem 1.25rem;
+  gap: 1rem 1.5rem;
+}
+
+.calendar-add {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.calendar-add-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.calendar-add-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+.btn-calendar {
+  padding: 0.7rem 1.15rem;
+  font-size: 0.75rem;
 }
 
 @media (max-width: 819px) {
@@ -1258,7 +1282,15 @@ button { font: inherit; cursor: pointer; }
     text-align: left;
   }
   .details-actions { justify-content: center; }
-  .details-actions .btn { width: min(100%, 22rem); }
+  .details-actions > .btn-link { width: min(100%, 22rem); }
+  .calendar-add { width: 100%; align-items: center; }
+  .calendar-add-options { width: min(100%, 22rem); }
+  .calendar-add-options .btn-calendar {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: 0.5rem;
+    letter-spacing: 0.08em;
+  }
 }
 
 /* ============================================================
