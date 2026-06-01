@@ -148,7 +148,7 @@
   var EVENT = {
     title: "Room 38 · The Table",
     details:
-      "A Bible study gathering called The Table. Worship, teaching from the Word, and time around the table together. Bring a Bible and the season you're in.\n\nRSVP: https://officialroom38.com/#join",
+      "A Room 38 gathering called The Table. Worship, teaching from the Word, and time around the table together. Bring a Bible and the season you're in.\n\nRSVP: https://officialroom38.com/#join",
     location: "Address shared with confirmed guests after RSVP",
     url: "https://officialroom38.com/",
     uid: "the-table-weekly@officialroom38.com",
