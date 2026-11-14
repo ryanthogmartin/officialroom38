@@ -1,900 +1,381 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#160f0a" />
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>We're Building | Room 38</title>
+<meta name="description" content="A night to come dream and start building what this next year is going to look like. Saturday, January 16, 2027. Free, all ages.">
+<meta name="theme-color" content="#160f0a">
+<link rel="canonical" href="https://officialroom38.com/">
+<link rel="icon" href="/assets/images/favicon.svg?v=2" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Room 38">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://officialroom38.com/">
+<meta property="og:title" content="We're Building | Room 38">
+<meta property="og:description" content="A night to come dream and start building what this next year is going to look like. Saturday, January 16, 2027. Free, all ages.">
+<meta property="og:image" content="https://officialroom38.com/assets/images/og-werebuilding.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="We're Building, a Room 38 event on Saturday, January 16, 2027.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="We're Building | Room 38">
+<meta name="twitter:description" content="A night to come dream and start building what this next year is going to look like. Saturday, January 16, 2027.">
+<meta name="twitter:image" content="https://officialroom38.com/assets/images/og-werebuilding.png">
+<meta name="twitter:image:alt" content="We're Building, a Room 38 event on Saturday, January 16, 2027.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "We're Building",
+  "description": "A night to come dream and start building what this next year is going to look like.",
+  "startDate": "2027-01-16",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "isAccessibleForFree": true,
+  "image": "https://officialroom38.com/assets/images/og-werebuilding.png",
+  "url": "https://officialroom38.com/",
+  "location": {
+    "@type": "Place",
+    "name": "Phoenix / Scottsdale area",
+    "address": { "@type": "PostalAddress", "addressRegion": "AZ", "addressCountry": "US" }
+  },
+  "organizer": { "@type": "Organization", "name": "Room 38", "url": "https://officialroom38.com/" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#160f0a; --ink-soft:#261b13; --paper:#f7f1eb; --white:#fff;
+    --sand:#e8d8c8; --sand-soft:#e0d0c8; --taupe:#b0a090; --brown:#7d6d60; --gray:#6a6a6a;
+    --pad:clamp(1.25rem,5vw,3rem);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;border-radius:0}
+  [hidden]{display:none!important}
+  html{scroll-behavior:smooth}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 var(--pad)}
+  .narrow{max-width:680px}
 
-    <!-- SEO -->
-    <title>Room 38 — The Table</title>
-    <meta
-      name="description"
-      content="A space where people encounter God deeply, find healing, and build community authentically."
-    />
-    <meta name="author" content="Room 38" />
-    <link rel="canonical" href="https://officialroom38.com/" />
+  .label{font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--brown)}
+  h1,h2,h3,.btn{font-family:"Inter Tight",Inter,sans-serif}
+  h2{font-size:clamp(2rem,6vw,3.2rem);font-weight:800;line-height:1.05;letter-spacing:-.02em;margin:.6rem 0 1.4rem}
+  h3{font-size:1.15rem;font-weight:700;letter-spacing:-.01em}
 
-    <!-- Social preview: Open Graph + Twitter Card -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Room 38" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:url" content="https://officialroom38.com/" />
-    <meta property="og:title" content="Room 38 — The Table" />
-    <meta
-      property="og:description"
-      content="A space where people encounter God deeply, find healing, and build community authentically."
-    />
-    <meta property="og:image" content="https://officialroom38.com/assets/images/og-room38-card.png" />
-    <meta property="og:image:secure_url" content="https://officialroom38.com/assets/images/og-room38-card.png" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Room 38 logo with The Table gathering description." />
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:54px;padding:0 1.9rem;
+    background:var(--ink);color:var(--white);text-decoration:none;font-weight:700;font-size:.8rem;letter-spacing:.2em;
+    text-transform:uppercase;border:1px solid var(--ink);cursor:pointer;transition:background .2s,color .2s}
+  .btn:hover{background:var(--ink-soft)}
+  .btn.light{background:var(--white);color:var(--ink);border-color:var(--white)}
+  .btn.light:hover{background:var(--sand)}
+  .link{font-size:.8rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;
+    border-bottom:1px solid var(--taupe);padding-bottom:3px}
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://officialroom38.com/" />
-    <meta name="twitter:title" content="Room 38 — The Table" />
-    <meta
-      name="twitter:description"
-      content="A space where people encounter God deeply, find healing, and build community authentically."
-    />
-    <meta name="twitter:image" content="https://officialroom38.com/assets/images/og-room38-card.png" />
-    <meta name="twitter:image:alt" content="Room 38 logo with The Table gathering description." />
+  /* Nav */
+  nav{display:flex;justify-content:space-between;align-items:center;padding:1.1rem var(--pad);max-width:1080px;margin:0 auto}
+  nav .link{border:none}
+  .mark{display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;font-family:"Inter Tight",Inter,sans-serif;
+    font-weight:800;font-size:.82rem;letter-spacing:.24em;text-transform:uppercase}
+  .mark img{height:32px;width:auto}
 
-    <link rel="icon" href="assets/images/favicon.svg?v=2" type="image/svg+xml" />
+  /* Hero */
+  .hero{padding:3.5rem 0 4.5rem}
+  .hero h1{font-size:clamp(3.3rem,15vw,8.5rem);font-weight:800;line-height:.9;letter-spacing:-.045em;text-transform:uppercase;margin:1rem 0 1.6rem}
+  .hero .lead{font-size:clamp(1.1rem,3vw,1.35rem);max-width:30ch;margin-bottom:2rem}
+  .meta{display:grid;grid-template-columns:1fr;border-top:1px solid var(--taupe);margin:0 0 2.2rem}
+  .meta div{padding:.9rem 0;border-bottom:1px solid var(--taupe)}
+  .meta span{display:block}
+  .meta .v{font-weight:500;margin-top:.15rem}
+  .meta .soon{color:var(--gray)}
+  .cta{display:flex;flex-wrap:wrap;gap:1.4rem;align-items:center}
+  @media(min-width:720px){.meta{grid-template-columns:repeat(3,1fr)} .meta div{padding:1rem 1.2rem 1rem 0}}
 
-    <!-- Fonts: Inter (body + UI) + Inter Tight (display, heavy). Inter approximates the geometric grotesque wordmark when set heavy. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Inter+Tight:wght@600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
+  /* Ticker: six identical runs, so sliding by half always loops seamlessly, even on very wide screens */
+  .ticker{background:var(--ink);color:var(--white);overflow:hidden;white-space:nowrap;padding:.95rem 0}
+  .ticker .track{display:flex;width:max-content;animation:scroll 96s linear infinite;font-family:"Inter Tight",sans-serif;font-weight:700;
+    font-size:.82rem;letter-spacing:.24em;text-transform:uppercase}
+  .ticker .track span{flex:none}
+  .ticker i{font-style:normal;color:var(--taupe);margin:0 1.3rem}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.ticker .track{animation:none}}
 
-    <!-- JSON-LD -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Room 38",
-        "alternateName": "The Table",
-        "url": "https://officialroom38.com/",
-        "sameAs": ["https://instagram.com/officialroom38"],
-        "description": "A space where people encounter God deeply, find healing, and build community authentically."
-      }
-    </script>
+  section{padding:clamp(4rem,10vw,7rem) 0}
+  .dark{background:var(--ink);color:var(--white)}
+  .dark .label{color:var(--taupe)}
+  .white{background:var(--white)}
 
-    <link rel="stylesheet" href="styles.css?v=14" />
-  </head>
-  <body>
-    <a href="#main" class="skip-link">Skip to content</a>
+  /* Story */
+  .story p{font-size:clamp(1.1rem,2.6vw,1.3rem);margin-bottom:1.2rem;color:#e9e1d9}
+  .story p.big{font-family:"Inter Tight",sans-serif;font-weight:700;color:var(--white);font-size:clamp(1.4rem,4vw,2rem);line-height:1.25;letter-spacing:-.01em}
 
-    <!-- ============ NAV ============ -->
-    <header class="site-header" id="site-header">
-      <div class="container nav-row">
-        <a href="#top" class="brand" aria-label="Room 38 home">
-          <span class="brand-wordmark">ROOM&nbsp;38</span>
-        </a>
+  /* Photos */
+  .photos{display:grid;grid-auto-flow:column;grid-auto-columns:78%;gap:.75rem;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding:0 var(--pad);scroll-padding:0 var(--pad);margin-top:3rem;scrollbar-width:none}
+  .photos::-webkit-scrollbar{display:none}
+  .photos img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;scroll-snap-align:start;background:var(--ink-soft)}
+  .swipe{padding:0 var(--pad);margin-top:.9rem}
+  @media(min-width:860px){.photos{grid-auto-flow:row;grid-template-columns:repeat(3,1fr);max-width:1080px;margin:3rem auto 0}.swipe{display:none}}
 
-        <button
-          class="menu-toggle"
-          type="button"
-          aria-label="Open navigation menu"
-          aria-controls="primary-navigation"
-          aria-expanded="false"
-        >
-          <span class="menu-toggle-label">Menu</span>
-        </button>
+  /* Expect */
+  .list{list-style:none;border-top:1px solid var(--taupe);margin-top:1rem}
+  .list li{display:grid;grid-template-columns:3.2rem 1fr;align-items:baseline;padding:1.3rem 0;border-bottom:1px solid var(--taupe)}
+  .list .n{font-family:"Inter Tight",sans-serif;font-weight:800;color:var(--taupe);font-size:.95rem}
+  .list h3{font-size:clamp(1.3rem,4vw,1.7rem)}
+  .note{color:var(--gray);margin-top:1.4rem;font-size:.95rem}
 
-        <nav class="nav-links" id="primary-navigation" aria-label="Primary">
-          <a href="#vision">Vision</a>
-          <a href="#table">The Table</a>
-          <a href="#values">Values</a>
-          <a href="#worship">Worship</a>
-          <a href="#expect">Expect</a>
-          <a href="#faq">FAQ</a>
-          <a href="#details">Details</a>
-          <a href="#join">Save your seat</a>
-        </nav>
+  /* Details */
+  .grid{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--taupe)}
+  .grid div{padding:1.4rem 0;border-bottom:1px solid var(--taupe)}
+  .grid p{margin-top:.35rem}
+  .grid .sub{color:var(--gray);font-size:.95rem;margin-top:.1rem}
+  @media(min-width:720px){.grid{grid-template-columns:1fr 1fr;column-gap:3rem}}
 
-        <a href="#join" class="btn btn-ghost nav-cta">Save your seat</a>
+  /* FAQ */
+  details{border-bottom:1px solid var(--taupe)}
+  details:first-of-type{border-top:1px solid var(--taupe)}
+  summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;align-items:center;
+    padding:1.3rem 0;font-family:"Inter Tight",sans-serif;font-weight:700;font-size:1.15rem;min-height:60px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-weight:400;font-size:1.6rem;line-height:1;color:var(--brown)}
+  details[open] summary::after{content:"–"}
+  details p{padding:0 0 1.4rem;color:#3d332b;max-width:58ch}
+
+  /* RSVP */
+  .rsvp h2{margin-bottom:.8rem}
+  .rsvp .intro{color:#d9cfc6;margin-bottom:2.4rem}
+  .rsvp.is-pending .if-live{display:none}
+  .rsvp:not(.is-pending) .if-pending{display:none}
+  .dm-btn{width:100%}
+  form{display:grid;gap:1.6rem}
+  .field label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe);margin-bottom:.4rem}
+  .field input,.field select{width:100%;min-height:54px;padding:.8rem 1rem;background:var(--ink-soft);color:var(--white);
+    border:1px solid #4a3d33;font:inherit;font-size:17px;appearance:none;-webkit-appearance:none}
+  .field select{background-image:linear-gradient(45deg,transparent 50%,var(--taupe) 50%),linear-gradient(135deg,var(--taupe) 50%,transparent 50%);
+    background-position:calc(100% - 22px) 50%,calc(100% - 16px) 50%;background-size:6px 6px;background-repeat:no-repeat}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--sand)}
+  .hp{position:absolute;left:-9999px}
+  form .btn{width:100%}
+  form .btn:disabled{cursor:default;opacity:.7}
+  #msg{margin-top:1.4rem;min-height:1.5rem;color:var(--sand)}
+  .done h3{font-size:1.8rem;margin-bottom:.6rem}
+  .done p{color:#d9cfc6}
+
+  /* Final */
+  .final{text-align:center}
+  .final h2{max-width:16ch;margin-left:auto;margin-right:auto}
+  .final .phrase{color:var(--brown);margin-top:1.6rem;font-size:.95rem}
+
+  footer{background:var(--ink);color:#cfc5bb;padding:3rem 0 6rem;font-size:.95rem}
+  footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5rem;align-items:center}
+  footer .brand{font-family:"Inter Tight",sans-serif;font-weight:800;letter-spacing:.2em;color:var(--white)}
+  footer .links{display:flex;gap:1.6rem;flex-wrap:wrap}
+  footer a{text-decoration:none;border-bottom:1px solid #4a3d33;padding-bottom:2px}
+  footer .copy{margin-top:2rem;color:#8f8478;font-size:.82rem}
+
+  /* Sticky mobile bar */
+  .bar{position:fixed;left:0;right:0;bottom:0;padding:.7rem var(--pad) calc(.7rem + env(safe-area-inset-bottom));background:var(--paper);
+    border-top:1px solid var(--taupe);transform:translateY(110%);transition:transform .3s;z-index:10}
+  .bar.show{transform:none}
+  .bar .btn{width:100%}
+  @media(min-width:860px){.bar{display:none}}
+</style>
+</head>
+<body>
+
+<nav aria-label="Room 38">
+  <a class="mark" href="/" aria-label="Room 38 home"><img src="/assets/images/door-mark.png" width="82" height="96" alt=""><span>Room 38</span></a>
+  <a class="link" href="#rsvp">RSVP</a>
+</nav>
+
+<main id="main">
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="label">Room 38 presents</p>
+    <h1>We're<br>Building</h1>
+    <p class="lead">A night to come dream and start building what this next year is going to look like.</p>
+    <div class="meta">
+      <div><span class="label">When</span><span class="v">Saturday, January 16, 2027</span></div>
+      <div><span class="label">Time</span><span class="v soon">Coming soon</span></div>
+      <div><span class="label">Where</span><span class="v soon">Phoenix / Scottsdale · location coming soon</span></div>
+    </div>
+    <div class="cta">
+      <a class="btn" href="#rsvp">Save your seat</a>
+      <a class="link" href="#story">What is this night? →</a>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="track">
+    <span>Dream<i>✦</i>Build<i>✦</i>January 16<i>✦</i>Free<i>✦</i>All ages welcome<i>✦</i>Come as you are<i>✦</i></span>
+    <span>Dream<i>✦</i>Build<i>✦</i>January 16<i>✦</i>Free<i>✦</i>All ages welcome<i>✦</i>Come as you are<i>✦</i></span>
+    <span>Dream<i>✦</i>Build<i>✦</i>January 16<i>✦</i>Free<i>✦</i>All ages welcome<i>✦</i>Come as you are<i>✦</i></span>
+    <span>Dream<i>✦</i>Build<i>✦</i>January 16<i>✦</i>Free<i>✦</i>All ages welcome<i>✦</i>Come as you are<i>✦</i></span>
+    <span>Dream<i>✦</i>Build<i>✦</i>January 16<i>✦</i>Free<i>✦</i>All ages welcome<i>✦</i>Come as you are<i>✦</i></span>
+    <span>Dream<i>✦</i>Build<i>✦</i>January 16<i>✦</i>Free<i>✦</i>All ages welcome<i>✦</i>Come as you are<i>✦</i></span>
+  </div>
+</div>
+
+<section class="dark story" id="story">
+  <div class="wrap narrow">
+    <p class="label">Why we're doing this</p>
+    <h2>It's time to start building.</h2>
+    <p>It's important to dream, and to put those dreams into practice.</p>
+    <p class="big">We're doing this because it's time to start building, breaking generational chains, and becoming all God created us to be.</p>
+  </div>
+  <div class="photos" role="group" aria-label="Photos from Room 38">
+    <img src="/assets/images/week-one/room38-week-one-3523-1600.jpg" alt="A Room 38 night" width="1600" height="1067" loading="lazy">
+    <img src="/assets/images/week-one/room38-week-one-3530-1100.jpg" alt="A Room 38 night" width="733" height="1100" loading="lazy">
+    <img src="/assets/images/week-one/room38-week-one-3525-1100.jpg" alt="A Room 38 night" width="733" height="1100" loading="lazy">
+  </div>
+  <p class="label swipe" aria-hidden="true">Swipe →</p>
+</section>
+
+<section id="expect">
+  <div class="wrap narrow">
+    <p class="label">What to expect</p>
+    <h2>What the night holds.</h2>
+    <ul class="list">
+      <li><span class="n">01</span><h3>Vision boards</h3></li>
+      <li><span class="n">02</span><h3>Music</h3></li>
+      <li><span class="n">03</span><h3>Light refreshments</h3></li>
+      <li><span class="n">04</span><h3>Vendors</h3></li>
+    </ul>
+    <p class="note">The full flow of the night is coming soon.</p>
+  </div>
+</section>
+
+<section class="white" id="details">
+  <div class="wrap">
+    <p class="label">Details</p>
+    <h2>The details.</h2>
+    <div class="grid">
+      <div><span class="label">Date</span><p>Saturday, January 16, 2027</p></div>
+      <div><span class="label">Time</span><p>Coming soon</p></div>
+      <div><span class="label">Location</span><p>Phoenix / Scottsdale area</p><p class="sub">Exact location coming soon</p></div>
+      <div><span class="label">Cost</span><p>Free</p></div>
+      <div><span class="label">Who it's for</span><p>Everyone, all ages</p><p class="sub">No childcare provided, so kids stay with you</p></div>
+      <div><span class="label">What to wear</span><p>No dress code. Be you.</p></div>
+      <div><span class="label">What to bring</span><p>Yourself and an open mind</p></div>
+      <div><span class="label">Food</span><p>Light refreshments</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap narrow">
+    <p class="label">FAQ</p>
+    <h2>The honest questions.</h2>
+    <details><summary>Are kids allowed?</summary><p>Yes. Everyone of all ages is welcome. There's no childcare, so kids stay with you.</p></details>
+    <details><summary>Do I need to bring anything?</summary><p>Just yourself and an open mind! We'll provide the essentials for the experience. Feel free to come with some goals, dreams, and ideas for the year ahead.</p></details>
+    <details><summary>Do I need to know anyone to attend?</summary><p>Absolutely not! Whether you're coming with friends or showing up solo, this night is designed to help you connect with like-minded people.</p></details>
+    <details><summary>Can I bring a friend?</summary><p>Yes, absolutely. Please bring friends! Just add them to your guest count when you RSVP.</p></details>
+    <details><summary>I have another question.</summary><p>DM us on Instagram at <a href="https://instagram.com/officialroom38" target="_blank" rel="noopener">@officialroom38</a>.</p></details>
+  </div>
+</section>
+
+<!-- RSVP. Until RSVP_URL (in the script at the bottom) is set to the Apps Script web app URL,
+     this section shows the Instagram DM option instead of the form ("is-pending"). -->
+<section class="dark rsvp is-pending" id="rsvp">
+  <div class="wrap narrow">
+    <p class="label">RSVP</p>
+    <h2>Save your seat.</h2>
+    <p class="intro">It's free, and everyone's welcome.<span class="if-live"> We'll email you the time and location as soon as they're set.</span><span class="if-pending"> Online RSVP opens soon. Until then, DM us on Instagram with your name and how many people are coming, and we'll save your seat.</span></p>
+    <a class="btn light dm-btn if-pending" href="https://instagram.com/officialroom38" target="_blank" rel="noopener">DM @officialroom38</a>
+    <div id="formWrap" class="if-live">
+      <form id="rsvpForm" novalidate>
+        <div class="field"><label for="name">Full name</label><input id="name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required></div>
+        <div class="field"><label for="guests">How many people, including you?</label>
+          <select id="guests" name="guests">
+            <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+            <option>6</option><option>7</option><option>8</option><option>9</option><option>10+</option>
+          </select>
+        </div>
+        <input class="hp" id="company" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn light" type="submit">Save your seat</button>
+      </form>
+      <p id="msg" role="status"></p>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap narrow">
+    <p class="label">January 16, 2027</p>
+    <h2>Come dream with us.</h2>
+    <a class="btn" href="#rsvp">Save your seat</a>
+    <p class="phrase">People over perfection.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <span class="brand">ROOM 38</span>
+      <div class="links">
+        <a href="https://instagram.com/officialroom38" target="_blank" rel="noopener">Instagram @officialroom38</a>
       </div>
-    </header>
+    </div>
+    <p class="copy">© <span id="year">2026</span> Room 38 · Phoenix / Scottsdale, Arizona</p>
+  </div>
+</footer>
 
-    <main id="main">
-      <!-- ============ HERO ============ -->
-      <section class="hero" id="top">
-        <div class="container hero-inner">
-          <div class="hero-meta-row">
-            <span class="meta-mark">R/38</span>
-            <span class="meta-divider" aria-hidden="true"></span>
-            <span class="meta-text">Room 38 · The Table</span>
-            <span class="meta-divider" aria-hidden="true"></span>
-            <span class="meta-text">Est. 2026</span>
-          </div>
+<div class="bar" id="bar"><a class="btn" href="#rsvp">Save your seat</a></div>
 
-          <div class="hero-grid">
-            <figure class="hero-lockup">
-              <img
-                src="assets/images/lockup-black-trans.png"
-                alt="Room 38 lockup: an open door with oil pooling at the threshold, beneath the wordmark ROOM 38"
-                width="900"
-                height="1180"
-              />
-            </figure>
+<script>
+  // Paste your Google Apps Script Web app URL (ends in /exec) between the quotes.
+  // While this is still the placeholder, the RSVP section shows the Instagram DM option instead of the form.
+  const RSVP_URL = 'PASTE_YOUR_WEB_APP_URL_HERE';
 
-            <div class="hero-content">
-              <h1 class="visually-hidden">Room 38 — The Table</h1>
+  const rsvp = document.getElementById('rsvp');
+  const form = document.getElementById('rsvpForm');
+  const msg = document.getElementById('msg');
+  const wrap = document.getElementById('formWrap');
+  const isLive = /^https:\/\/\S+$/.test(RSVP_URL.trim());
 
-              <figure class="tagline-image">
-                <img
-                  src="assets/images/tagline-trans.png"
-                  alt="The oil came from the crushing. The breakthrough came from the waiting."
-                  width="1600"
-                  height="220"
-                />
-              </figure>
+  if (isLive) rsvp.classList.remove('is-pending');
 
-              <p class="hero-lede">
-                Come carrying the season you're in and leave transformed by the God who turns
-                pressure into purpose and crushing into overflow.
-              </p>
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    if (!name.value.trim() || !email.value.trim() || !email.checkValidity()) {
+      msg.textContent = 'Please add your name and a valid email.';
+      return;
+    }
+    if (document.getElementById('company').value) return; // spam bot
+    if (!isLive) return;
+    const btn = form.querySelector('button');
+    btn.disabled = true; btn.textContent = 'Sending…'; msg.textContent = '';
+    try {
+      await fetch(RSVP_URL.trim(), { method: 'POST', mode: 'no-cors', body: new URLSearchParams(new FormData(form)) });
+      wrap.innerHTML = '<div class="done"><h3>You\'re in.</h3><p>We saved your seat. We\'ll email you the time and location as soon as they\'re set. See you January 16.</p></div>';
+    } catch (err) {
+      btn.disabled = false; btn.textContent = 'Save your seat';
+      msg.textContent = 'Something went wrong. Please try again, or DM us @officialroom38.';
+    }
+  });
 
-              <div class="hero-ctas">
-                <a href="#join" class="btn btn-primary">Save your seat →</a>
-                <a href="#vision" class="btn btn-link">What is Room 38?</a>
-              </div>
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-              <dl class="hero-stats">
-                <div>
-                  <dt>Gathering</dt>
-                  <dd>Mon · 7:00 PM</dd>
-                </div>
-                <div>
-                  <dt>Built on</dt>
-                  <dd>Presence</dd>
-                </div>
-                <div>
-                  <dt>Open to</dt>
-                  <dd>Anyone</dd>
-                </div>
-              </dl>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ MARQUEE / SCRIPTURE STRIP ============ -->
-      <section class="strip strip-light" aria-hidden="true">
-        <div class="strip-track">
-          <span>Presence over performance</span><span aria-hidden="true">✦</span>
-          <span>People over perfection</span><span aria-hidden="true">✦</span>
-          <span>We carry oil</span><span aria-hidden="true">✦</span>
-          <span>Waiting is not wasted</span><span aria-hidden="true">✦</span>
-          <span>Crushing produces oil</span><span aria-hidden="true">✦</span>
-          <span>Healing still happens</span><span aria-hidden="true">✦</span>
-          <span>Presence over performance</span><span aria-hidden="true">✦</span>
-          <span>People over perfection</span><span aria-hidden="true">✦</span>
-          <span>We carry oil</span><span aria-hidden="true">✦</span>
-          <span>Waiting is not wasted</span><span aria-hidden="true">✦</span>
-          <span>Crushing produces oil</span><span aria-hidden="true">✦</span>
-          <span>Healing still happens</span><span aria-hidden="true">✦</span>
-        </div>
-      </section>
-
-      <!-- ============ VISION / WELCOME ============ -->
-      <section class="section section-vision" id="vision" aria-labelledby="vision-title">
-        <div class="container">
-          <div class="section-head">
-            <p class="section-eyebrow">The Vision</p>
-          </div>
-
-          <div class="grid-2">
-            <div class="col-main">
-              <h2 id="vision-title" class="section-title">
-                A space where people encounter God deeply, find healing, and build community
-                <em>authentically.</em>
-              </h2>
-            </div>
-            <div class="col-side">
-              <p class="lede">
-                The number <strong>38</strong> marks two moments in Scripture: one of waiting in
-                the wilderness, one of healing after years of being stuck. We believe God does some
-                of His deepest work in seasons that feel hidden, delayed, or crushing. Just like
-                oil is produced under pressure, He produces purpose, intimacy, and anointing in the
-                places we least expected.
-              </p>
-              <p class="lede strong">
-                Room 38 is not built around performance. It is built around presence.
-              </p>
-            </div>
-          </div>
-
-          <p class="swipe-hint" aria-hidden="true">Swipe →</p>
-          <ul class="pillars swipe-row" tabindex="0" aria-label="Three pillars: Worship, Teaching, Community">
-            <li>
-              <span class="pillar-num">i.</span>
-              <h3>Worship</h3>
-              <p>We create space to encounter God.</p>
-            </li>
-            <li>
-              <span class="pillar-num">ii.</span>
-              <h3>Teaching</h3>
-              <p>We make room for truth to transform us.</p>
-            </li>
-            <li>
-              <span class="pillar-num">iii.</span>
-              <h3>Community</h3>
-              <p>We remind people they were never meant to walk alone.</p>
-            </li>
-          </ul>
-
-          <figure class="welcome-note">
-            <blockquote>
-              Room 38 was born from seasons of crushing, prayer, surrender, and deep encounters
-              with the presence of God. My prayer is that every person who walks through these
-              doors would feel seen, safe, loved, and welcomed into His presence.
-            </blockquote>
-            <figcaption>Kihryn</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <!-- ============ THIS ROOM IS FOR ============ -->
-      <section class="section section-for section-dark" id="for" aria-labelledby="for-title">
-        <div class="container">
-          <div class="section-head">
-            <p class="section-eyebrow on-dark">This Room Is For</p>
-            <h2 id="for-title" class="section-title on-dark">
-              People in the in-between.
-            </h2>
-          </div>
-
-          <p class="swipe-hint on-dark" aria-hidden="true">Swipe →</p>
-          <ul class="for-list swipe-row" tabindex="0" aria-label="Who Room 38 is for">
-            <li><span>01</span><p>People leaving wilderness seasons</p></li>
-            <li><span>02</span><p>People carrying questions</p></li>
-            <li><span>03</span><p>People desperate for more of God</p></li>
-            <li><span>04</span><p>People looking for healing</p></li>
-            <li><span>05</span><p>People learning to encounter Jesus personally</p></li>
-          </ul>
-
-          <div class="believe-strip">
-            <p>We believe waiting is not wasted.</p>
-            <p>We believe crushing can produce oil.</p>
-            <p>We believe healing still happens.</p>
-            <p>And we believe one encounter with Jesus can change everything.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ THE TABLE / VERSE ============ -->
-      <section class="section section-table" id="table" aria-labelledby="table-title">
-        <div class="container">
-          <div class="verse-block">
-            <p class="verse-eyebrow">Psalm 23:5</p>
-            <blockquote class="verse">
-              You prepare a table before me<br />
-              in the presence of my enemies.<br />
-              You anoint my head with oil;<br />
-              <em>my cup overflows.</em>
-            </blockquote>
-          </div>
-
-          <div class="grid-2 table-why">
-            <div class="col-label">
-              <p class="section-eyebrow">Why a Table</p>
-            </div>
-            <div class="col-main">
-              <h2 id="table-title" class="section-title">
-                Not just another gathering. A home.
-              </h2>
-              <p class="lede">
-                Room 38 was never meant to be just another gathering. It was meant to feel like
-                home. Around a table, people are seen, welcomed, fed, heard, and loved. The table
-                is a place where every person, no matter their story or season, has a seat.
-              </p>
-              <p class="lede">
-                Before someone encounters the message, they encounter the atmosphere. We come
-                ready to set the table, prepare the space, hold the door open, and make room
-                for the presence of God.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ WEEK ONE MOMENT ============ -->
-      <section class="section section-weekone" id="week-one" aria-labelledby="weekone-title">
-        <div class="container">
-          <div class="weekone-head">
-            <p class="section-eyebrow">A preview</p>
-            <h2 id="weekone-title" class="section-title">
-              What it's like around <em>the table.</em>
-            </h2>
-            <p class="section-sub">
-              A glimpse into the room: worship, prayer, honest conversation, and people gathering
-              around the table to encounter God, find healing, and build community authentically.
-            </p>
-          </div>
-
-          <figure class="weekone-feature">
-            <img
-              src="assets/images/week-one/room38-week-one-3523-1600.jpg"
-              srcset="
-                assets/images/week-one/room38-week-one-3523-1100.jpg 1100w,
-                assets/images/week-one/room38-week-one-3523-1600.jpg 1600w"
-              sizes="(min-width: 820px) 880px, 100vw"
-              alt="Room 38 Week One — friends gathered around the table for worship and the Word."
-              width="1600"
-              height="1067"
-            />
-            <figcaption>Around the Table</figcaption>
-          </figure>
-
-          <p class="swipe-hint" aria-hidden="true">Swipe →</p>
-          <ul
-            class="weekone-strip"
-            tabindex="0"
-            aria-label="Week One photo highlights — swipe to view more"
-          >
-            <li>
-              <img
-                src="assets/images/week-one/room38-week-one-3530-1100.jpg"
-                alt="A moment from Week One: worship in the room."
-                width="733"
-                height="1100"
-                loading="lazy"
-              />
-            </li>
-            <li>
-              <img
-                src="assets/images/week-one/room38-week-one-3525-1100.jpg"
-                alt="A moment from Week One: hands raised, eyes closed."
-                width="733"
-                height="1100"
-                loading="lazy"
-              />
-            </li>
-            <li>
-              <img
-                src="assets/images/week-one/room38-week-one-3795-1100.jpg"
-                alt="A moment from Week One: friends listening together."
-                width="733"
-                height="1100"
-                loading="lazy"
-              />
-            </li>
-            <li>
-              <img
-                src="assets/images/week-one/room38-week-one-3522-1100.jpg"
-                alt="A moment from Week One: worship leading at the table."
-                width="733"
-                height="1100"
-                loading="lazy"
-              />
-            </li>
-            <li>
-              <img
-                src="assets/images/week-one/room38-week-one-3527-1100.jpg"
-                alt="A moment from Week One: opening the Word together."
-                width="733"
-                height="1100"
-                loading="lazy"
-              />
-            </li>
-            <li>
-              <img
-                src="assets/images/week-one/room38-week-one-3531-1100.jpg"
-                alt="A moment from Week One: prayer over a friend."
-                width="733"
-                height="1100"
-                loading="lazy"
-              />
-            </li>
-            <li>
-              <img
-                src="assets/images/week-one/room38-week-one-3524-1100.jpg"
-                alt="A moment from Week One: the room full, the table set."
-                width="1100"
-                height="733"
-                loading="lazy"
-              />
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- ============ TABLE VALUES ============ -->
-      <section class="section section-values section-dark" id="values" aria-labelledby="values-title">
-        <div class="container">
-          <div class="section-head">
-            <p class="section-eyebrow on-dark">Table Values</p>
-            <h2 id="values-title" class="section-title on-dark">
-              How we carry the house.
-            </h2>
-          </div>
-
-          <p class="swipe-hint on-dark" aria-hidden="true">Swipe →</p>
-          <ol class="values-grid swipe-row" tabindex="0" aria-label="Five Table values">
-            <li>
-              <span class="value-num">01</span>
-              <h3>Presence over performance</h3>
-              <p>We are not here to impress people. We are here to host the presence of God authentically.</p>
-            </li>
-            <li>
-              <span class="value-num">02</span>
-              <h3>People over perfection</h3>
-              <p>Every person who walks through the door matters. We choose love, grace, and hospitality over appearances.</p>
-            </li>
-            <li>
-              <span class="value-num">03</span>
-              <h3>We set the atmosphere</h3>
-              <p>We help create an environment where people feel safe, welcomed, and open to encountering God.</p>
-            </li>
-            <li>
-              <span class="value-num">04</span>
-              <h3>We carry oil</h3>
-              <p>Intimacy with God off the platform matters more than appearances on it. We cannot pour out what we have not first received.</p>
-            </li>
-            <li>
-              <span class="value-num">05</span>
-              <h3>We lead with humility</h3>
-              <p>No role is too small. We serve with joy, flexibility, and honor because every detail matters in building the house.</p>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      <!-- ============ WORSHIP ============ -->
-      <!--
-        ╭────────────────────────────────────────────────────────────────╮
-        │  WORSHIP SECTION                                               │
-        │  Embeds the official Room 38 worship sessions Spotify          │
-        │  playlist. To swap the playlist:                               │
-        │    1) Copy the playlist ID from the Spotify share URL          │
-        │       (the long alphanumeric string after /playlist/)          │
-        │    2) Replace it in BOTH the iframe src below AND in the       │
-        │       "Open in Spotify" link's href.                           │
-        │    3) Also update worship.html (same two spots).               │
-        ╰────────────────────────────────────────────────────────────────╯
-      -->
-      <section class="section section-worship" id="worship" aria-labelledby="worship-title">
-        <div class="container">
-          <div class="section-head">
-            <p class="section-eyebrow">Worship Sessions</p>
-            <h2 id="worship-title" class="section-title">
-              The songs we sing around <em>the table.</em>
-            </h2>
-            <p class="section-sub">
-              A living playlist of the worship that shapes our gatherings: what we sing on
-              Monday nights, what we play in the kitchen, and what carries us into His
-              presence between rooms.
-            </p>
-          </div>
-
-          <div class="worship-grid">
-            <div class="worship-embed-shell">
-              <iframe
-                title="Room 38 Worship Sessions playlist on Spotify"
-                class="worship-embed"
-                src="https://open.spotify.com/embed/playlist/01vM88ofRGwsxR3VKUVhxp?utm_source=generator&theme=0"
-                width="100%"
-                height="480"
-                frameborder="0"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-              ></iframe>
-            </div>
-
-            <aside class="worship-aside">
-              <p class="worship-aside-eyebrow">Listen anywhere</p>
-              <p class="worship-aside-lede">
-                Save the playlist on Spotify, or browse the full songs &amp; lyrics index
-                with every track linked to listen, read, and meditate on the words.
-              </p>
-              <div class="worship-ctas">
-                <a
-                  href="https://open.spotify.com/playlist/01vM88ofRGwsxR3VKUVhxp"
-                  target="_blank"
-                  rel="noopener"
-                  class="btn btn-primary"
-                >
-                  Open in Spotify →
-                </a>
-                <a href="worship.html" class="btn btn-ghost">
-                  Songs &amp; lyrics →
-                </a>
-              </div>
-            </aside>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ WHAT TO EXPECT ============ -->
-      <section class="section section-expect" id="expect" aria-labelledby="expect-title">
-        <div class="container">
-          <div class="section-head">
-            <p class="section-eyebrow">What to Expect</p>
-            <h2 id="expect-title" class="section-title">
-              Your first night, simply.
-            </h2>
-            <p class="section-sub">
-              If it's your first time, here's the rhythm of a Monday. You don't need to dress up,
-              know anyone, or have it all figured out. Come as you are.
-            </p>
-          </div>
-
-          <p class="swipe-hint" aria-hidden="true">Swipe →</p>
-          <ol class="expect-grid swipe-row" tabindex="0" aria-label="What to expect: four steps">
-            <li>
-              <span class="expect-num">01</span>
-              <h3>Arrive</h3>
-              <p>
-                Doors open a few minutes before 7. We share the address with you once your RSVP
-                is in. Park, walk up, breathe. Someone will meet you at the door.
-              </p>
-            </li>
-            <li>
-              <span class="expect-num">02</span>
-              <h3>Settle in</h3>
-              <p>
-                Grab water or coffee, find a seat, meet a few faces. There's no sign-in,
-                no nametags, no spotlight on the new person.
-              </p>
-            </li>
-            <li>
-              <span class="expect-num">03</span>
-              <h3>Worship &amp; Word</h3>
-              <p>
-                We worship together, open the Bible, and walk through a passage with room
-                for questions. Nothing is rushed.
-              </p>
-            </li>
-            <li>
-              <span class="expect-num">04</span>
-              <h3>Around the table</h3>
-              <p>
-                We gather, talk honestly about what God is doing, pray for each other, and
-                wrap up by around 9. You're welcome to linger.
-              </p>
-            </li>
-          </ol>
-
-          <div class="expect-bring">
-            <div>
-              <p class="expect-eyebrow">What to bring</p>
-              <p class="lede">
-                A Bible (any translation; a phone is fine) and the season you're in. That's it.
-                You don't have to bring food, an answer, or a polished version of yourself.
-              </p>
-            </div>
-            <div>
-              <p class="expect-eyebrow">A note for first-timers</p>
-              <p class="lede">
-                You don't have to know the Bible well. You don't have to be sure about God.
-                You don't have to come with a friend. There is room at this table for honest
-                questions and quiet seasons.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ FAQ ============ -->
-      <section class="section section-faq section-dark" id="faq" aria-labelledby="faq-title">
-        <div class="container">
-          <div class="section-head">
-            <p class="section-eyebrow on-dark">FAQ</p>
-            <h2 id="faq-title" class="section-title on-dark">
-              The honest questions.
-            </h2>
-            <p class="section-sub on-dark">
-              Practical answers for first-time guests. Anything missing? DM us on Instagram and
-              we'll add it.
-            </p>
-          </div>
-
-          <ul class="faq-list">
-            <li>
-              <details>
-                <summary>Can I come alone?</summary>
-                <p>
-                  Yes. Most people do their first time. You'll be welcomed at the door and
-                  introduced to a few people at your pace. No spotlight, no pressure.
-                </p>
-              </details>
-            </li>
-            <li>
-              <details>
-                <summary>Where does Room 38 meet?</summary>
-                <p>
-                  We meet in a home in the Phoenix/Scottsdale area. To honor the privacy of the people who
-                  host, we share the exact address by email after you RSVP. The space is warm,
-                  quiet, and easy to find once you have the details.
-                </p>
-              </details>
-            </li>
-            <li>
-              <details>
-                <summary>Do I need to know the Bible well?</summary>
-                <p>
-                  Not at all. People walk in with every level of background, from "I grew up in
-                  church" to "I've never opened a Bible." We read together, ask real questions,
-                  and explain context as we go.
-                </p>
-              </details>
-            </li>
-            <li>
-              <details>
-                <summary>Can I invite a friend?</summary>
-                <p>
-                  Please do. Ask them to fill out the same RSVP so we can hold a seat and send
-                  them the address. The table grows by invitation.
-                </p>
-              </details>
-            </li>
-            <li>
-              <details>
-                <summary>What happens after I RSVP?</summary>
-                <p>
-                  You'll get a confirmation from us with the address, parking notes, and what to
-                  expect. If anything changes (date, location, weather), we'll let you know
-                  before Monday.
-                </p>
-              </details>
-            </li>
-            <li>
-              <details>
-                <summary>What should I bring?</summary>
-                <p>
-                  A Bible (any translation; the Bible app on your phone is fine) and an open
-                  heart. You're welcome to bring a friend, a journal, or nothing at all.
-                </p>
-              </details>
-            </li>
-            <li>
-              <details>
-                <summary>How long does it last?</summary>
-                <p>
-                  We start at 7:00 PM and usually wrap up by 9:00 PM. You're welcome to linger
-                  afterward or head out as soon as we close.
-                </p>
-              </details>
-            </li>
-            <li>
-              <details>
-                <summary>Is it kid-friendly?</summary>
-                <p>
-                  Room 38 is built for teens and adults at the moment. If you have questions
-                  about bringing kids, DM us on Instagram and we'll talk through it.
-                </p>
-              </details>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- ============ DETAILS ============ -->
-      <!--
-        ╭────────────────────────────────────────────────────────────────╮
-        │  EDITABLE COPY: meeting details                                │
-        │  Replace the values inside data-edit="…" if anything changes.  │
-        │  Search this file for "data-edit" to find every editable slot. │
-        ╰────────────────────────────────────────────────────────────────╯
-      -->
-      <section class="section section-details" id="details" aria-labelledby="details-title">
-        <div class="container">
-          <div class="section-head">
-            <p class="section-eyebrow">Details</p>
-            <h2 id="details-title" class="section-title">When &amp; how we gather.</h2>
-          </div>
-
-          <ul class="detail-cards">
-            <li class="detail-card">
-              <span class="detail-label">When</span>
-              <p data-edit="when">Mondays at 7:00 PM</p>
-            </li>
-            <li class="detail-card">
-              <span class="detail-label">Where</span>
-              <p data-edit="where">Address shared with confirmed guests after RSVP.</p>
-            </li>
-            <li class="detail-card">
-              <span class="detail-label">Format</span>
-              <p data-edit="format">Worship, teaching from the Word, and time around the table together.</p>
-            </li>
-            <li class="detail-card">
-              <span class="detail-label">Bring</span>
-              <p data-edit="bring">A Bible (any translation) and the season you're in. That's enough.</p>
-            </li>
-          </ul>
-
-          <div class="details-actions">
-            <div class="calendar-add" role="group" aria-label="Add to calendar">
-              <span class="calendar-add-label">Add to calendar</span>
-              <div class="calendar-add-options">
-                <a
-                  href="assets/room38-the-table.ics"
-                  class="btn btn-ghost btn-calendar"
-                  data-calendar-ics
-                  download="room38-the-table.ics"
-                >
-                  Apple / iCal
-                </a>
-                <a
-                  href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Room+38+%C2%B7+The+Table&dates=20260602T020000Z%2F20260602T040000Z&details=A+Room+38+gathering+called+The+Table.+Worship%2C+teaching+from+the+Word%2C+and+time+around+the+table+together.+Bring+a+Bible+and+the+season+you%27re+in.%0A%0ARSVP%3A+https%3A%2F%2Fofficialroom38.com%2F%23join&location=Address+shared+with+confirmed+guests+after+RSVP&ctz=America%2FPhoenix&recur=RRULE%3AFREQ%3DWEEKLY%3BINTERVAL%3D1%3BWKST%3DSU%3BBYDAY%3DMO"
-                  class="btn btn-ghost btn-calendar"
-                  data-calendar-google
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Google Calendar
-                </a>
-              </div>
-              <p class="calendar-add-help">Apple/iCal downloads a recurring weekly invite (Mondays, 7&ndash;9 PM). Google opens in a new tab with the event prefilled.</p>
-            </div>
-            <a
-              href="https://instagram.com/officialroom38"
-              target="_blank"
-              rel="noopener"
-              class="btn btn-link"
-            >
-              Questions? DM @officialroom38 →
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ TYPEFORM JOIN ============ -->
-      <section class="section section-join section-dark" id="join" aria-labelledby="join-title">
-        <div class="container">
-          <div class="join-head">
-            <p class="section-eyebrow on-dark">Save Your Seat</p>
-            <h2 id="join-title" class="section-title on-dark">
-              There's a seat for you at the table.
-            </h2>
-            <p class="section-sub on-dark">
-              A few quick questions so we can hold a seat, share the address, and welcome you well
-              before you arrive.
-            </p>
-          </div>
-
-          <div class="rsvp-card">
-            <div class="rsvp-card-inner">
-              <span class="rsvp-card-eyebrow">R/38 · RSVP</span>
-              <h3 class="rsvp-card-title">Hold a seat at the table</h3>
-              <ul class="rsvp-card-list">
-                <li><span aria-hidden="true">·</span> Takes about 60 seconds</li>
-                <li><span aria-hidden="true">·</span> Address shared after you RSVP</li>
-                <li><span aria-hidden="true">·</span> Mondays at 7:00 PM, Phoenix/Scottsdale</li>
-              </ul>
-
-              <button
-                type="button"
-                class="btn btn-primary rsvp-card-btn"
-                data-tf-popup="msZJsheu"
-                data-tf-size="100"
-                data-tf-iframe-props="title=Room 38 RSVP"
-                data-tf-medium="snippet"
-                data-tf-hidden="source=landing"
-                aria-label="Start RSVP for Room 38"
-              >
-                Start RSVP →
-              </button>
-
-              <p class="rsvp-card-fallback">
-                Trouble with the popup?
-                <a href="https://form.typeform.com/to/msZJsheu" target="_blank" rel="noopener">
-                  Open the form in a new tab →
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ INSTAGRAM ============ -->
-      <section class="section section-ig" id="instagram" aria-labelledby="ig-title">
-        <div class="container ig-row">
-          <div class="ig-copy">
-            <p class="section-eyebrow">Follow Along</p>
-            <h2 id="ig-title" class="section-title">
-              Between gatherings, we share what God is saying.
-            </h2>
-            <p class="section-sub">
-              Readings, reflections, and reminders that waiting is not wasted. Follow
-              <span class="handle">@officialroom38</span> on Instagram.
-            </p>
-            <a
-              href="https://instagram.com/officialroom38"
-              target="_blank"
-              rel="noopener"
-              class="btn btn-primary"
-            >
-              Follow on Instagram →
-            </a>
-          </div>
-
-          <div class="instagram-embed-shell">
-            <blockquote
-              class="instagram-media"
-              data-instgrm-permalink="https://www.instagram.com/officialroom38/?utm_source=ig_embed&amp;utm_campaign=loading"
-              data-instgrm-version="14"
-            >
-              <a
-                href="https://www.instagram.com/officialroom38/?utm_source=ig_embed&amp;utm_campaign=loading"
-                target="_blank"
-                rel="noopener"
-              >
-                View this profile on Instagram
-              </a>
-            </blockquote>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- ============ FOOTER ============ -->
-    <footer class="site-footer">
-      <div class="container">
-        <div class="footer-wordmark" aria-hidden="true">ROOM&nbsp;38</div>
-
-        <div class="footer-grid">
-          <div class="footer-col">
-            <h4>Visit</h4>
-            <ul>
-              <li><a href="#vision">Vision</a></li>
-              <li><a href="#table">The Table</a></li>
-              <li><a href="#values">Values</a></li>
-              <li><a href="#worship">Worship</a></li>
-              <li><a href="worship.html">Songs &amp; lyrics</a></li>
-              <li><a href="/week-one/">Week One recap</a></li>
-              <li><a href="#expect">What to expect</a></li>
-              <li><a href="#faq">FAQ</a></li>
-              <li><a href="#details">Details</a></li>
-              <li><a href="#join">Save your seat</a></li>
-            </ul>
-          </div>
-
-          <div class="footer-col">
-            <h4>Elsewhere</h4>
-            <ul>
-              <li>
-                <a href="https://instagram.com/officialroom38" target="_blank" rel="noopener">Instagram</a>
-              </li>
-              <li>
-                <a href="https://form.typeform.com/to/msZJsheu" target="_blank" rel="noopener">RSVP form</a>
-              </li>
-              <li>
-                <a href="assets/room38-the-table.ics" data-calendar-ics download="room38-the-table.ics">Add to calendar (Apple/iCal)</a>
-              </li>
-              <li>
-                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Room+38+%C2%B7+The+Table&dates=20260602T020000Z%2F20260602T040000Z&details=A+Room+38+gathering+called+The+Table.+Worship%2C+teaching+from+the+Word%2C+and+time+around+the+table+together.+Bring+a+Bible+and+the+season+you%27re+in.%0A%0ARSVP%3A+https%3A%2F%2Fofficialroom38.com%2F%23join&location=Address+shared+with+confirmed+guests+after+RSVP&ctz=America%2FPhoenix&recur=RRULE%3AFREQ%3DWEEKLY%3BINTERVAL%3D1%3BWKST%3DSU%3BBYDAY%3DMO" data-calendar-google target="_blank" rel="noopener">Add to Google Calendar</a>
-              </li>
-              <li>
-                <a href="https://instagram.com/officialroom38" target="_blank" rel="noopener">Contact via Instagram DM</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="footer-col footer-scripture">
-            <p class="scripture">
-              &ldquo;You prepare a table before me… You anoint my head with oil; my cup overflows.&rdquo;
-            </p>
-            <p class="scripture-ref">Psalm 23:5</p>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          <p>© <span id="year">2026</span> Room 38 · The Table</p>
-          <p class="footer-site">officialroom38.com</p>
-        </div>
-      </div>
-    </footer>
-
-    <script src="//embed.typeform.com/next/embed.js" defer></script>
-    <script async src="https://www.instagram.com/embed.js"></script>
-    <script src="script.js?v=8" defer></script>
-  </body>
+  // Show the sticky RSVP button on phones once you scroll past the top
+  const bar = document.getElementById('bar');
+  const hero = document.getElementById('top');
+  let pastHero = false, atRsvp = false;
+  const update = () => bar.classList.toggle('show', pastHero && !atRsvp);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; update(); }).observe(hero);
+    new IntersectionObserver(([e]) => { atRsvp = e.isIntersecting; update(); }).observe(rsvp);
+  }
+</script>
+</body>
 </html>

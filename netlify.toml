@@ -6,26 +6,47 @@
   # No build step — this is a static site.
   publish = "."
 
-# Clean URL for /worship/ while keeping worship.html as the canonical file.
+# The site is now a single page (We're Building). Links to the previous
+# site's pages, and the event's originally planned /werebuilding URL,
+# all land on the homepage.
 [[redirects]]
-  from = "/worship/"
-  to = "/worship.html"
-  status = 200
+  from = "/werebuilding"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/werebuilding/"
+  to = "/"
+  status = 301
 
 [[redirects]]
   from = "/worship"
-  to = "/worship/"
+  to = "/"
   status = 301
 
-# Clean URL for /week-one/ — recap page for the first night around the table.
 [[redirects]]
-  from = "/week-one/"
-  to = "/week-one.html"
-  status = 200
+  from = "/worship/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/worship.html"
+  to = "/"
+  status = 301
 
 [[redirects]]
   from = "/week-one"
-  to = "/week-one/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/week-one/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/week-one.html"
+  to = "/"
   status = 301
 
 # Branded custom 404 for any unmatched path.

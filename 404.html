@@ -1,136 +1,45 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#160f0a" />
-
-    <title>Page not found | Room 38</title>
-    <meta name="description" content="That page doesn't exist at Room 38. Find your way back to The Table." />
-    <meta name="robots" content="noindex" />
-
-    <link rel="icon" href="/assets/images/favicon.svg?v=2" type="image/svg+xml" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Inter+Tight:wght@600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-
-    <link rel="stylesheet" href="/styles.css?v=13" />
-    <style>
-      .notfound {
-        min-height: calc(100vh - 64px);
-        display: flex;
-        align-items: center;
-        background: var(--paper-warm);
-        padding-block: clamp(3rem, 2rem + 4vw, 6rem);
-      }
-      .notfound-grid {
-        display: grid;
-        gap: clamp(1.5rem, 1rem + 1.5vw, 2.5rem);
-        max-width: 56rem;
-        margin-inline: auto;
-        text-align: center;
-      }
-      .notfound-code {
-        font-family: var(--font-display);
-        font-weight: 900;
-        font-size: clamp(4rem, 12vw + 1rem, 9rem);
-        line-height: 0.9;
-        letter-spacing: 0.04em;
-        color: var(--ink);
-        margin: 0;
-      }
-      .notfound-eyebrow {
-        font-family: var(--font-display);
-        font-weight: 800;
-        font-size: 0.75rem;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: var(--muted);
-        margin: 0;
-      }
-      .notfound-title {
-        font-family: var(--font-display);
-        font-weight: 800;
-        font-size: var(--t-section);
-        line-height: 1.1;
-        letter-spacing: -0.01em;
-        text-transform: uppercase;
-        color: var(--ink);
-        margin: 0;
-      }
-      .notfound-title em {
-        font-style: normal;
-        border-bottom: 4px solid var(--ink);
-        padding-bottom: 0.05em;
-      }
-      .notfound-lede {
-        font-size: var(--t-lede);
-        line-height: 1.55;
-        color: var(--ink-soft);
-        max-width: 52ch;
-        margin: 0 auto;
-      }
-      .notfound-ctas {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem 1rem;
-        justify-content: center;
-      }
-      @media (max-width: 560px) {
-        .notfound-ctas { flex-direction: column; align-items: center; }
-        .notfound-ctas .btn { width: min(100%, 22rem); }
-      }
-    </style>
-  </head>
-  <body>
-    <a href="#main" class="skip-link">Skip to content</a>
-
-    <header class="site-header" id="site-header">
-      <div class="container nav-row">
-        <a href="/" class="brand" aria-label="Room 38 home">
-          <span class="brand-wordmark">ROOM&nbsp;38</span>
-        </a>
-        <a href="/#join" class="btn btn-ghost nav-cta">Save your seat</a>
-      </div>
-    </header>
-
-    <main id="main">
-      <section class="notfound">
-        <div class="container">
-          <div class="notfound-grid">
-            <p class="notfound-eyebrow">Error · 404</p>
-            <p class="notfound-code" aria-hidden="true">38?</p>
-            <h1 class="notfound-title">
-              This page is not at <em>the table.</em>
-            </h1>
-            <p class="notfound-lede">
-              The link may have moved or the page never existed. Head back to Room 38, save your
-              seat for Monday night, or find the songs we sing around the table.
-            </p>
-            <div class="notfound-ctas">
-              <a href="/" class="btn btn-primary">Back to Room 38 →</a>
-              <a href="/#join" class="btn btn-ghost">Save your seat →</a>
-              <a href="/worship/" class="btn btn-ghost">Songs &amp; lyrics →</a>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container">
-        <div class="footer-wordmark" aria-hidden="true">ROOM&nbsp;38</div>
-        <div class="footer-bottom">
-          <p>© <span id="year">2026</span> Room 38 · The Table</p>
-          <p class="footer-site">officialroom38.com</p>
-        </div>
-      </div>
-    </footer>
-
-    <script src="/script.js?v=6" defer></script>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found | Room 38</title>
+<meta name="description" content="That page isn't here. Find your way to We're Building, a Room 38 event.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#160f0a">
+<link rel="icon" href="/assets/images/favicon.svg?v=2" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#160f0a;--ink-soft:#261b13;--paper:#f7f1eb;--white:#fff;--brown:#7d6d60;--pad:clamp(1.25rem,5vw,3rem)}
+  *{box-sizing:border-box;margin:0;padding:0;border-radius:0}
+  body{min-height:100vh;display:flex;flex-direction:column;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+  nav{width:100%;max-width:1080px;margin:0 auto;padding:1.1rem var(--pad)}
+  .mark{display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;font-family:"Inter Tight",Inter,sans-serif;font-weight:800;font-size:.82rem;letter-spacing:.24em;text-transform:uppercase}
+  .mark img{height:32px;width:auto}
+  main{flex:1;display:flex;align-items:center;width:100%;max-width:1080px;margin:0 auto;padding:3rem var(--pad) 5rem}
+  .label{font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--brown)}
+  h1{font-family:"Inter Tight",Inter,sans-serif;font-size:clamp(2.8rem,11vw,6rem);font-weight:800;line-height:.92;letter-spacing:-.04em;text-transform:uppercase;margin:1rem 0 1.4rem}
+  p.lead{font-size:clamp(1.05rem,2.6vw,1.25rem);max-width:34ch;margin-bottom:2rem}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 1.9rem;background:var(--ink);color:var(--white);text-decoration:none;
+    font-family:"Inter Tight",Inter,sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;border:1px solid var(--ink);transition:background .2s}
+  .btn:hover{background:var(--ink-soft)}
+</style>
+</head>
+<body>
+  <nav aria-label="Room 38">
+    <a class="mark" href="/" aria-label="Room 38 home"><img src="/assets/images/door-mark.png" width="82" height="96" alt=""><span>Room 38</span></a>
+  </nav>
+  <main>
+    <div>
+      <p class="label">Page not found</p>
+      <h1>This page<br>isn't here.</h1>
+      <p class="lead">The link may be old. Everything happening right now is on the homepage.</p>
+      <a class="btn" href="/">Go to We're Building</a>
+    </div>
+  </main>
+</body>
 </html>
