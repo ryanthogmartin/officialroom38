@@ -57,17 +57,17 @@
   [hidden]{display:none!important}
   html{scroll-behavior:smooth}
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  html.modal-open,html.modal-open body{overflow:hidden}
   body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
   img{display:block;max-width:100%}
   a{color:inherit}
-  a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+  a:focus-visible,button:focus-visible{outline:2px solid currentColor;outline-offset:3px}
   .wrap{max-width:1080px;margin:0 auto;padding:0 var(--pad)}
   .narrow{max-width:680px}
 
   .label{font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--brown)}
-  h1,h2,h3,.btn{font-family:"Inter Tight",Inter,sans-serif}
+  h1,h2,.btn{font-family:"Inter Tight",Inter,sans-serif}
   h2{font-size:clamp(2rem,6vw,3.2rem);font-weight:800;line-height:1.05;letter-spacing:-.02em;margin:.6rem 0 1.4rem}
-  h3{font-size:1.15rem;font-weight:700;letter-spacing:-.01em}
 
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:54px;padding:0 1.9rem;
     background:var(--ink);color:var(--white);text-decoration:none;font-weight:700;font-size:.8rem;letter-spacing:.2em;
@@ -75,18 +75,16 @@
   .btn:hover{background:var(--ink-soft)}
   .btn.light{background:var(--white);color:var(--ink);border-color:var(--white)}
   .btn.light:hover{background:var(--sand)}
-  .link{font-size:.8rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;
-    border-bottom:1px solid var(--taupe);padding-bottom:3px}
+  .link{font-size:.8rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none}
 
   /* Nav */
   nav{display:flex;justify-content:space-between;align-items:center;padding:1.1rem var(--pad);max-width:1080px;margin:0 auto}
-  nav .link{border:none}
   .mark{display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;font-family:"Inter Tight",Inter,sans-serif;
     font-weight:800;font-size:.82rem;letter-spacing:.24em;text-transform:uppercase}
   .mark img{height:32px;width:auto}
 
   /* Hero */
-  .hero{padding:3.5rem 0 4.5rem}
+  .hero{padding:3rem 0 3.5rem}
   .hero h1{font-size:clamp(3.3rem,15vw,8.5rem);font-weight:800;line-height:.9;letter-spacing:-.045em;text-transform:uppercase;margin:1rem 0 1.6rem}
   .hero .lead{font-size:clamp(1.1rem,3vw,1.35rem);max-width:30ch;margin-bottom:2rem}
   .meta{display:grid;grid-template-columns:1fr;border-top:1px solid var(--taupe);margin:0 0 2.2rem}
@@ -94,7 +92,6 @@
   .meta span{display:block}
   .meta .v{font-weight:500;margin-top:.15rem}
   .meta .soon{color:var(--gray)}
-  .cta{display:flex;flex-wrap:wrap;gap:1.4rem;align-items:center}
   @media(min-width:720px){.meta{grid-template-columns:repeat(3,1fr)} .meta div{padding:1rem 1.2rem 1rem 0}}
 
   /* Ticker: six identical runs, so sliding by half always loops seamlessly, even on very wide screens */
@@ -106,76 +103,32 @@
   @keyframes scroll{to{transform:translateX(-50%)}}
   @media(prefers-reduced-motion:reduce){.ticker .track{animation:none}}
 
-  section{padding:clamp(4rem,10vw,7rem) 0}
+  section{padding:clamp(3.5rem,9vw,6rem) 0}
   .dark{background:var(--ink);color:var(--white)}
   .dark .label{color:var(--taupe)}
   .white{background:var(--white)}
 
   /* Story */
-  .story p{font-size:clamp(1.1rem,2.6vw,1.3rem);margin-bottom:1.2rem;color:#e9e1d9}
-  .story p.big{font-family:"Inter Tight",sans-serif;font-weight:700;color:var(--white);font-size:clamp(1.4rem,4vw,2rem);line-height:1.25;letter-spacing:-.01em}
+  .story p{font-size:clamp(1.1rem,2.6vw,1.3rem);margin:1rem 0 1.2rem;color:#e9e1d9}
+  .story p.big{font-family:"Inter Tight",sans-serif;font-weight:700;color:var(--white);font-size:clamp(1.4rem,4vw,2rem);line-height:1.25;letter-spacing:-.01em;margin-bottom:0}
 
-  /* Photos */
-  .photos{display:grid;grid-auto-flow:column;grid-auto-columns:78%;gap:.75rem;overflow-x:auto;scroll-snap-type:x mandatory;
-    padding:0 var(--pad);scroll-padding:0 var(--pad);margin-top:3rem;scrollbar-width:none}
-  .photos::-webkit-scrollbar{display:none}
-  .photos img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;scroll-snap-align:start;background:var(--ink-soft)}
-  .swipe{padding:0 var(--pad);margin-top:.9rem}
-  @media(min-width:860px){.photos{grid-auto-flow:row;grid-template-columns:repeat(3,1fr);max-width:1080px;margin:3rem auto 0}.swipe{display:none}}
-
-  /* Expect */
-  .list{list-style:none;border-top:1px solid var(--taupe);margin-top:1rem}
-  .list li{display:grid;grid-template-columns:3.2rem 1fr;align-items:baseline;padding:1.3rem 0;border-bottom:1px solid var(--taupe)}
-  .list .n{font-family:"Inter Tight",sans-serif;font-weight:800;color:var(--taupe);font-size:.95rem}
-  .list h3{font-size:clamp(1.3rem,4vw,1.7rem)}
-  .note{color:var(--gray);margin-top:1.4rem;font-size:.95rem}
+  /* Photos: three across on every screen */
+  .photos{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;max-width:1080px;margin:2.5rem auto 0;padding:0 var(--pad)}
+  .photos img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:var(--ink-soft)}
+  @media(min-width:860px){.photos{gap:.75rem}}
 
   /* Details */
-  .grid{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--taupe)}
-  .grid div{padding:1.4rem 0;border-bottom:1px solid var(--taupe)}
-  .grid p{margin-top:.35rem}
+  .grid{display:grid;grid-template-columns:1fr;border-top:1px solid var(--taupe)}
+  .grid div{padding:1.15rem 0;border-bottom:1px solid var(--taupe)}
+  .grid p{margin-top:.3rem}
   .grid .sub{color:var(--gray);font-size:.95rem;margin-top:.1rem}
   @media(min-width:720px){.grid{grid-template-columns:1fr 1fr;column-gap:3rem}}
-
-  /* FAQ */
-  details{border-bottom:1px solid var(--taupe)}
-  details:first-of-type{border-top:1px solid var(--taupe)}
-  summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;align-items:center;
-    padding:1.3rem 0;font-family:"Inter Tight",sans-serif;font-weight:700;font-size:1.15rem;min-height:60px}
-  summary::-webkit-details-marker{display:none}
-  summary::after{content:"+";font-weight:400;font-size:1.6rem;line-height:1;color:var(--brown)}
-  details[open] summary::after{content:"–"}
-  details p{padding:0 0 1.4rem;color:#3d332b;max-width:58ch}
-
-  /* RSVP */
-  .rsvp h2{margin-bottom:.8rem}
-  .rsvp .intro{color:#d9cfc6;margin-bottom:2.4rem}
-  .rsvp.is-pending .if-live{display:none}
-  .rsvp:not(.is-pending) .if-pending{display:none}
-  .dm-btn{width:100%}
-  form{display:grid;gap:1.6rem}
-  .field label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe);margin-bottom:.4rem}
-  .field input,.field select{width:100%;min-height:54px;padding:.8rem 1rem;background:var(--ink-soft);color:var(--white);
-    border:1px solid #4a3d33;font:inherit;font-size:17px;appearance:none;-webkit-appearance:none}
-  .field select{background-image:linear-gradient(45deg,transparent 50%,var(--taupe) 50%),linear-gradient(135deg,var(--taupe) 50%,transparent 50%);
-    background-position:calc(100% - 22px) 50%,calc(100% - 16px) 50%;background-size:6px 6px;background-repeat:no-repeat}
-  .field input:focus,.field select:focus{outline:none;border-color:var(--sand)}
-  .hp{position:absolute;left:-9999px}
-  form .btn{width:100%}
-  form .btn:disabled{cursor:default;opacity:.7}
-  #msg{margin-top:1.4rem;min-height:1.5rem;color:var(--sand)}
-  .done h3{font-size:1.8rem;margin-bottom:.6rem}
-  .done p{color:#d9cfc6}
-
-  /* Final */
-  .final{text-align:center}
-  .final h2{max-width:16ch;margin-left:auto;margin-right:auto}
-  .final .phrase{color:var(--brown);margin-top:1.6rem;font-size:.95rem}
+  @media(min-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
+  .details-cta{margin-top:2.2rem}
 
   footer{background:var(--ink);color:#cfc5bb;padding:3rem 0 6rem;font-size:.95rem}
   footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5rem;align-items:center}
   footer .brand{font-family:"Inter Tight",sans-serif;font-weight:800;letter-spacing:.2em;color:var(--white)}
-  footer .links{display:flex;gap:1.6rem;flex-wrap:wrap}
   footer a{text-decoration:none;border-bottom:1px solid #4a3d33;padding-bottom:2px}
   footer .copy{margin-top:2rem;color:#8f8478;font-size:.82rem}
 
@@ -185,13 +138,46 @@
   .bar.show{transform:none}
   .bar .btn{width:100%}
   @media(min-width:860px){.bar{display:none}}
+
+  /* RSVP popup: full screen on phones, centered panel on larger screens */
+  .rsvp-dialog{position:fixed;inset:0;margin:auto;border:0;padding:0;width:min(100% - 2rem,520px);max-width:none;
+    height:fit-content;max-height:min(100dvh - 2rem,860px);overflow:auto;overscroll-behavior:contain;background:var(--ink);color:var(--white)}
+  .rsvp-dialog:focus{outline:none}
+  .rsvp-dialog::backdrop{background:rgba(22,15,10,.62);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+  .rsvp-dialog.fallback{z-index:100;box-shadow:0 0 0 100vmax rgba(22,15,10,.62)}
+  .rsvp-dialog[open]{animation:rise .25s ease-out}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){.rsvp-dialog[open]{animation:none}}
+  @media(max-width:600px){.rsvp-dialog{width:100%;height:100%;max-height:none}}
+  .panel{position:relative;padding:2.6rem clamp(1.25rem,5vw,2.5rem) 2.2rem}
+  @media(max-width:600px){.panel{padding-top:calc(3.4rem + env(safe-area-inset-top));padding-bottom:calc(2rem + env(safe-area-inset-bottom))}}
+  .close{position:absolute;top:calc(.4rem + env(safe-area-inset-top));right:.4rem;width:48px;height:48px;display:grid;place-items:center;
+    background:none;border:0;color:var(--white);font:400 2rem/1 Inter,sans-serif;cursor:pointer}
+  .rsvp-dialog .label{color:var(--taupe)}
+  .rsvp-dialog h2{margin:.5rem 0 .6rem}
+  .rsvp-dialog .intro{color:#d9cfc6;margin-bottom:1.8rem}
+  form{display:grid;gap:1.2rem}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+  .field label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe);margin-bottom:.4rem}
+  .field input,.field select{width:100%;min-height:54px;padding:.8rem 1rem;background:var(--ink-soft);color:var(--white);
+    border:1px solid #4a3d33;font:inherit;font-size:17px;appearance:none;-webkit-appearance:none}
+  .field select{background-image:linear-gradient(45deg,transparent 50%,var(--taupe) 50%),linear-gradient(135deg,var(--taupe) 50%,transparent 50%);
+    background-position:calc(100% - 22px) 50%,calc(100% - 16px) 50%;background-size:6px 6px;background-repeat:no-repeat}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--sand)}
+  .field [aria-invalid="true"]{border-color:#d9907a}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  form .btn{width:100%;margin-top:.3rem}
+  form .btn:disabled{cursor:default;opacity:.7}
+  .msg{min-height:1.5rem;color:var(--sand);font-size:.95rem}
+  .done p:not(.label){color:#d9cfc6;margin-bottom:2rem}
+  .done .btn{width:100%}
 </style>
 </head>
 <body>
 
 <nav aria-label="Room 38">
   <a class="mark" href="/" aria-label="Room 38 home"><img src="/assets/images/door-mark.png" width="82" height="96" alt=""><span>Room 38</span></a>
-  <a class="link" href="#rsvp">RSVP</a>
+  <a class="link" href="#rsvp" data-rsvp>RSVP</a>
 </nav>
 
 <main id="main">
@@ -205,10 +191,7 @@
       <div><span class="label">Time</span><span class="v soon">Coming soon</span></div>
       <div><span class="label">Where</span><span class="v soon">Phoenix / Scottsdale · location coming soon</span></div>
     </div>
-    <div class="cta">
-      <a class="btn" href="#rsvp">Save your seat</a>
-      <a class="link" href="#story">What is this night? →</a>
-    </div>
+    <a class="btn" href="#rsvp" data-rsvp>Save your seat</a>
   </div>
 </header>
 
@@ -226,29 +209,13 @@
 <section class="dark story" id="story">
   <div class="wrap narrow">
     <p class="label">Why we're doing this</p>
-    <h2>It's time to start building.</h2>
     <p>It's important to dream, and to put those dreams into practice.</p>
     <p class="big">We're doing this because it's time to start building, breaking generational chains, and becoming all God created us to be.</p>
   </div>
   <div class="photos" role="group" aria-label="Photos from Room 38">
-    <img src="/assets/images/week-one/room38-week-one-3523-1600.jpg" alt="A Room 38 night" width="1600" height="1067" loading="lazy">
+    <img src="/assets/images/week-one/room38-week-one-3523-1100.jpg" alt="A Room 38 night" width="1100" height="733" loading="lazy">
     <img src="/assets/images/week-one/room38-week-one-3530-1100.jpg" alt="A Room 38 night" width="733" height="1100" loading="lazy">
     <img src="/assets/images/week-one/room38-week-one-3525-1100.jpg" alt="A Room 38 night" width="733" height="1100" loading="lazy">
-  </div>
-  <p class="label swipe" aria-hidden="true">Swipe →</p>
-</section>
-
-<section id="expect">
-  <div class="wrap narrow">
-    <p class="label">What to expect</p>
-    <h2>What the night holds.</h2>
-    <ul class="list">
-      <li><span class="n">01</span><h3>Vision boards</h3></li>
-      <li><span class="n">02</span><h3>Music</h3></li>
-      <li><span class="n">03</span><h3>Light refreshments</h3></li>
-      <li><span class="n">04</span><h3>Vendors</h3></li>
-    </ul>
-    <p class="note">The full flow of the night is coming soon.</p>
   </div>
 </section>
 
@@ -257,62 +224,14 @@
     <p class="label">Details</p>
     <h2>The details.</h2>
     <div class="grid">
-      <div><span class="label">Date</span><p>Saturday, January 16, 2027</p></div>
-      <div><span class="label">Time</span><p>Coming soon</p></div>
-      <div><span class="label">Location</span><p>Phoenix / Scottsdale area</p><p class="sub">Exact location coming soon</p></div>
+      <div><span class="label">What to expect</span><p>Vision boards, music, light refreshments, and vendors</p><p class="sub">Full schedule coming soon</p></div>
       <div><span class="label">Cost</span><p>Free</p></div>
       <div><span class="label">Who it's for</span><p>Everyone, all ages</p><p class="sub">No childcare provided, so kids stay with you</p></div>
       <div><span class="label">What to wear</span><p>No dress code. Be you.</p></div>
-      <div><span class="label">What to bring</span><p>Yourself and an open mind</p></div>
-      <div><span class="label">Food</span><p>Light refreshments</p></div>
+      <div><span class="label">What to bring</span><p>Yourself and an open mind</p><p class="sub">Bringing friends? Add them to your RSVP.</p></div>
+      <div><span class="label">Questions</span><p>DM us on Instagram at <a href="https://instagram.com/officialroom38" target="_blank" rel="noopener">@officialroom38</a></p></div>
     </div>
-  </div>
-</section>
-
-<section id="faq">
-  <div class="wrap narrow">
-    <p class="label">FAQ</p>
-    <h2>The honest questions.</h2>
-    <details><summary>Are kids allowed?</summary><p>Yes. Everyone of all ages is welcome. There's no childcare, so kids stay with you.</p></details>
-    <details><summary>Do I need to bring anything?</summary><p>Just yourself and an open mind! We'll provide the essentials for the experience. Feel free to come with some goals, dreams, and ideas for the year ahead.</p></details>
-    <details><summary>Do I need to know anyone to attend?</summary><p>Absolutely not! Whether you're coming with friends or showing up solo, this night is designed to help you connect with like-minded people.</p></details>
-    <details><summary>Can I bring a friend?</summary><p>Yes, absolutely. Please bring friends! Just add them to your guest count when you RSVP.</p></details>
-    <details><summary>I have another question.</summary><p>DM us on Instagram at <a href="https://instagram.com/officialroom38" target="_blank" rel="noopener">@officialroom38</a>.</p></details>
-  </div>
-</section>
-
-<!-- RSVP. Until RSVP_URL (in the script at the bottom) is set to the Apps Script web app URL,
-     this section shows the Instagram DM option instead of the form ("is-pending"). -->
-<section class="dark rsvp is-pending" id="rsvp">
-  <div class="wrap narrow">
-    <p class="label">RSVP</p>
-    <h2>Save your seat.</h2>
-    <p class="intro">It's free, and everyone's welcome.<span class="if-live"> We'll email you the time and location as soon as they're set.</span><span class="if-pending"> Online RSVP opens soon. Until then, DM us on Instagram with your name and how many people are coming, and we'll save your seat.</span></p>
-    <a class="btn light dm-btn if-pending" href="https://instagram.com/officialroom38" target="_blank" rel="noopener">DM @officialroom38</a>
-    <div id="formWrap" class="if-live">
-      <form id="rsvpForm" novalidate>
-        <div class="field"><label for="name">Full name</label><input id="name" name="name" autocomplete="name" required></div>
-        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required></div>
-        <div class="field"><label for="guests">How many people, including you?</label>
-          <select id="guests" name="guests">
-            <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
-            <option>6</option><option>7</option><option>8</option><option>9</option><option>10+</option>
-          </select>
-        </div>
-        <input class="hp" id="company" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button class="btn light" type="submit">Save your seat</button>
-      </form>
-      <p id="msg" role="status"></p>
-    </div>
-  </div>
-</section>
-
-<section class="final">
-  <div class="wrap narrow">
-    <p class="label">January 16, 2027</p>
-    <h2>Come dream with us.</h2>
-    <a class="btn" href="#rsvp">Save your seat</a>
-    <p class="phrase">People over perfection.</p>
+    <a class="btn details-cta" id="detailsCta" href="#rsvp" data-rsvp>Save your seat</a>
   </div>
 </section>
 </main>
@@ -321,45 +240,131 @@
   <div class="wrap">
     <div class="row">
       <span class="brand">ROOM 38</span>
-      <div class="links">
-        <a href="https://instagram.com/officialroom38" target="_blank" rel="noopener">Instagram @officialroom38</a>
-      </div>
+      <a href="https://instagram.com/officialroom38" target="_blank" rel="noopener">Instagram @officialroom38</a>
     </div>
     <p class="copy">© <span id="year">2026</span> Room 38 · Phoenix / Scottsdale, Arizona</p>
   </div>
 </footer>
 
-<div class="bar" id="bar"><a class="btn" href="#rsvp">Save your seat</a></div>
+<div class="bar" id="bar"><a class="btn" href="#rsvp" data-rsvp>Save your seat</a></div>
+
+<!-- RSVP popup. Every RSVP is saved by Netlify Forms (data-netlify) and, once RSVP_URL is set
+     in the script below, also sent to the Google Sheet through the Apps Script web app. -->
+<dialog class="rsvp-dialog" id="rsvp" aria-labelledby="rsvpTitle">
+  <div class="panel">
+    <button class="close" type="button" aria-label="Close" data-close>×</button>
+    <div id="rsvpForm-view">
+      <p class="label">RSVP</p>
+      <h2 id="rsvpTitle">Save your seat.</h2>
+      <p class="intro">It's free, and everyone's welcome. We'll email you the time and location as soon as they're set.</p>
+      <form name="rsvp" id="rsvpForm" method="POST" data-netlify="true" netlify-honeypot="company" novalidate>
+        <input type="hidden" name="form-name" value="rsvp">
+        <p class="hp" aria-hidden="true"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+        <div class="two">
+          <div class="field"><label for="firstName">First name</label><input id="firstName" name="firstName" autocomplete="given-name" required></div>
+          <div class="field"><label for="lastName">Last name</label><input id="lastName" name="lastName" autocomplete="family-name" required></div>
+        </div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required></div>
+        <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></div>
+        <div class="field"><label for="guests">How many people, including you?</label>
+          <select id="guests" name="guests">
+            <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+            <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+          </select>
+        </div>
+        <button class="btn light" type="submit">Save your seat</button>
+        <p class="msg" id="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <div class="done" id="rsvpDone-view" hidden>
+      <p class="label">RSVP</p>
+      <h2>You're in<span id="doneName"></span>.</h2>
+      <p>We saved your seat. We'll email you the time and location as soon as they're set. See you January 16.</p>
+      <button class="btn light" type="button" data-close>Done</button>
+    </div>
+  </div>
+</dialog>
 
 <script>
-  // Paste your Google Apps Script Web app URL (ends in /exec) between the quotes.
-  // While this is still the placeholder, the RSVP section shows the Instagram DM option instead of the form.
+  // Google Sheet: paste the Apps Script Web app URL (ends in /exec) between the quotes.
+  // Until then, RSVPs are still saved in Netlify (Forms tab), so none are lost.
   const RSVP_URL = 'PASTE_YOUR_WEB_APP_URL_HERE';
+  const toSheet = /^https:\/\/\S+$/.test(RSVP_URL.trim());
 
-  const rsvp = document.getElementById('rsvp');
+  const dialog = document.getElementById('rsvp');
   const form = document.getElementById('rsvpForm');
   const msg = document.getElementById('msg');
-  const wrap = document.getElementById('formWrap');
-  const isLive = /^https:\/\/\S+$/.test(RSVP_URL.trim());
+  const bar = document.getElementById('bar');
+  let done = false;
 
-  if (isLive) rsvp.classList.remove('is-pending');
+  // Popup open / close
+  function openRsvp() {
+    if (dialog.open) return;
+    document.documentElement.classList.add('modal-open');
+    if (typeof dialog.showModal === 'function') dialog.showModal();
+    else { dialog.classList.add('fallback'); dialog.setAttribute('open', ''); }
+  }
+  function closeRsvp() {
+    if (typeof dialog.close === 'function') dialog.close();
+    else { dialog.removeAttribute('open'); onClose(); }
+  }
+  function onClose() {
+    document.documentElement.classList.remove('modal-open');
+    if (location.hash === '#rsvp') history.replaceState(null, '', location.pathname + location.search);
+  }
+  dialog.addEventListener('close', onClose);
+  dialog.addEventListener('click', (e) => { if (e.target === dialog) closeRsvp(); });
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('[data-rsvp]')) { e.preventDefault(); openRsvp(); }
+    else if (e.target.closest('[data-close]')) closeRsvp();
+  });
+  if (location.hash === '#rsvp') openRsvp();
+  window.addEventListener('hashchange', () => { if (location.hash === '#rsvp') openRsvp(); });
+
+  // Form
+  const f = form.elements;
+  const digits = (v) => v.replace(/\D/g, '');
+  function formatPhone(v) {
+    let d = digits(v);
+    if (d.length === 11 && d[0] === '1') d = d.slice(1);
+    return d.length === 10 ? '(' + d.slice(0, 3) + ') ' + d.slice(3, 6) + '-' + d.slice(6) : v.trim();
+  }
+  function firstProblem() {
+    const problems = [];
+    [f.firstName, f.lastName, f.email, f.phone].forEach((el) => el.removeAttribute('aria-invalid'));
+    if (!f.firstName.value.trim()) problems.push([f.firstName, 'Please add your first name.']);
+    if (!f.lastName.value.trim()) problems.push([f.lastName, 'Please add your last name.']);
+    if (!f.email.value.trim() || !f.email.checkValidity()) problems.push([f.email, 'Please add a valid email address.']);
+    const n = digits(f.phone.value).length;
+    if (n < 10 || n > 15) problems.push([f.phone, 'Please add a valid mobile number.']);
+    problems.forEach(([el]) => el.setAttribute('aria-invalid', 'true'));
+    return problems[0];
+  }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const name = document.getElementById('name');
-    const email = document.getElementById('email');
-    if (!name.value.trim() || !email.value.trim() || !email.checkValidity()) {
-      msg.textContent = 'Please add your name and a valid email.';
-      return;
-    }
-    if (document.getElementById('company').value) return; // spam bot
-    if (!isLive) return;
-    const btn = form.querySelector('button');
-    btn.disabled = true; btn.textContent = 'Sending…'; msg.textContent = '';
-    try {
-      await fetch(RSVP_URL.trim(), { method: 'POST', mode: 'no-cors', body: new URLSearchParams(new FormData(form)) });
-      wrap.innerHTML = '<div class="done"><h3>You\'re in.</h3><p>We saved your seat. We\'ll email you the time and location as soon as they\'re set. See you January 16.</p></div>';
-    } catch (err) {
+    const problem = firstProblem();
+    if (problem) { msg.textContent = problem[1]; problem[0].focus(); return; }
+    if (f.company.value) return; // spam bot
+    f.phone.value = formatPhone(f.phone.value);
+    const data = new URLSearchParams(new FormData(form));
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true; btn.textContent = 'Saving…'; msg.textContent = '';
+
+    const saves = [
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: data.toString() })
+        .then((r) => { if (!r.ok) throw new Error('Netlify ' + r.status); })
+    ];
+    if (toSheet) saves.push(fetch(RSVP_URL.trim(), { method: 'POST', mode: 'no-cors', body: data }));
+    const results = await Promise.allSettled(saves);
+
+    if (results.some((r) => r.status === 'fulfilled')) {
+      done = true;
+      document.getElementById('doneName').textContent = ', ' + f.firstName.value.trim();
+      document.getElementById('rsvpForm-view').hidden = true;
+      document.getElementById('rsvpDone-view').hidden = false;
+      bar.classList.remove('show');
+    } else {
       btn.disabled = false; btn.textContent = 'Save your seat';
       msg.textContent = 'Something went wrong. Please try again, or DM us @officialroom38.';
     }
@@ -367,14 +372,19 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Show the sticky RSVP button on phones once you scroll past the top
-  const bar = document.getElementById('bar');
-  const hero = document.getElementById('top');
-  let pastHero = false, atRsvp = false;
-  const update = () => bar.classList.toggle('show', pastHero && !atRsvp);
+  // Sticky RSVP button on phones: shows once you scroll past the top,
+  // hides near the bottom button and footer, and after you RSVP.
+  let pastHero = false;
+  const nearEnd = new Set();
+  const update = () => bar.classList.toggle('show', !done && pastHero && nearEnd.size === 0);
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; update(); }).observe(hero);
-    new IntersectionObserver(([e]) => { atRsvp = e.isIntersecting; update(); }).observe(rsvp);
+    new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; update(); }).observe(document.getElementById('top'));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => (e.isIntersecting ? nearEnd.add(e.target) : nearEnd.delete(e.target)));
+      update();
+    });
+    io.observe(document.getElementById('detailsCta'));
+    io.observe(document.querySelector('footer'));
   }
 </script>
 </body>

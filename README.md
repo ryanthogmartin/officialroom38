@@ -22,8 +22,7 @@ When the time or venue is set, update these spots in `index.html`:
 
 - **Hero** (`.meta` block): the "Time" and "Where" values. Remove the `soon` class
   from a value once it is real so it stops showing in gray.
-- **Details** section: the "Time" and "Location" cards.
-- **What to expect**: replace "The full flow of the night is coming soon."
+- **Details** section: "Full schedule coming soon" under What to expect.
 - **JSON-LD** in the `<head>`: add the time to `startDate` (for example
   `2027-01-16T18:00:00-07:00`) and the venue address under `location`.
 - Optional: add a map link (only if the address is public) and Add to Calendar
@@ -35,32 +34,40 @@ tags, because images are cached for a year.
 
 ## RSVP form
 
-RSVPs post to a Google Apps Script web app that writes
-`Timestamp | Name | Email | Guests` rows into the We're Building RSVP Google Sheet.
-The script lives in that Sheet (Extensions → Apps Script), not in this repo.
+Every "RSVP" / "Save your seat" button opens a popup form (`<dialog id="rsvp">`)
+with first name, last name, email, mobile number, and how many people (1 to 10).
+Linking to `officialroom38.com/#rsvp` opens the popup directly.
 
-Until the web app URL is pasted in, the RSVP section shows a
-"DM @officialroom38" button instead of the form, so no RSVPs are lost.
+Each RSVP is saved two ways:
 
-To connect it:
+1. **Netlify Forms** (form name `rsvp`): always on. Submissions appear in the
+   Netlify project under **Forms**. This is the backup copy and what confirms
+   the save to the guest.
+2. **Google Sheet** ("We're Building RSVPs", columns FIRST, LAST, EMAIL, MOBILE,
+   GUESTS): through a Google Apps Script web app, once its URL is set as
+   `RSVP_URL` near the bottom of `index.html`. The script lives in the Sheet
+   (Extensions → Apps Script), not in this repo. It matches columns by header
+   name and fills a TIMESTAMP column if one is added.
 
-1. Open the RSVP Sheet → **Extensions → Apps Script**, paste in the `Code.gs`
-   script from the We're Building developer handoff, save.
+To connect the Sheet:
+
+1. Open the Sheet → **Extensions → Apps Script**, paste in `Code.gs`, save.
 2. **Deploy → New deployment → Web app**. Execute as **Me**, access **Anyone**.
 3. Authorize (on "Google hasn't verified this app": Advanced → Go to project → Allow).
-4. Copy the **Web app URL** (ends in `/exec`).
-5. In `index.html`, set `const RSVP_URL = '…/exec';` and push to `main`.
-6. Submit a test RSVP on the live site and check that a row appears in the Sheet.
+4. Copy the **Web app URL** (ends in `/exec`), set `const RSVP_URL = '…/exec';`
+   in `index.html`, and push to `main`.
+5. Submit a test RSVP on the live site and check that a row appears in the Sheet.
+   Copy any RSVPs that came in before this step from Netlify into the Sheet.
 
 If the script changes later: **Deploy → Manage deployments → Edit → New version**,
 or the live URL keeps running the old code.
 
-The form uses `fetch(..., { mode: 'no-cors' })` because Apps Script doesn't send
-CORS headers, so the page shows "You're in" whenever the request goes out. A hidden
-`company` field is a honeypot for spam bots.
+The Sheet request uses `fetch(..., { mode: 'no-cors' })` because Apps Script
+doesn't send CORS headers. A hidden `company` field is a honeypot for spam bots
+(Netlify's `netlify-honeypot` and the script both ignore filled-in submissions).
 
 Guests are told they'll get the time and location by email, so someone needs to
-send that from the Sheet's email list once details are set.
+send that from the RSVP list once details are set.
 
 ## Previous site
 
